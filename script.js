@@ -236,7 +236,7 @@ const crearElementoEspecies = (dataEspecies) => {
   <div class="font-bold text-xl mb-2">${dataEspecies.name}</div>
   <ul class="text-gray-700 text-base">
   <li><b>Classification Period:</b> ${dataEspecies.classification}</li>
-  <li><b>Language:</b> ${dataEspecies.language} cm</li>
+  <li><b>Language:</b> ${dataEspecies.language}</li>
   <li><b>Average Lifespan:</b> ${dataEspecies.average_lifespan}</li>
   <li><b>Average Height:</b> ${dataEspecies.average_height} </li>
     </ul>
