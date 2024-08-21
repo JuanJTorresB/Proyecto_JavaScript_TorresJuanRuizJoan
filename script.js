@@ -9,7 +9,7 @@ const butPersonajes = document.getElementById("butPersonajes");
 butPersonajes.addEventListener("click", () => {
   pagina = 1;
 });
-butPersonajes.addEventListener("click", ejecutarPeticiónPersonajes);
+butPersonajes.addEventListener("click", ejecutarPeticiónPersonajesMale);
 
 const butNaves = document.getElementById("butNaves");
 
@@ -119,12 +119,50 @@ const crearBotones = (section, maxPag) => {
 
 //Peticiones
 
+async function ejecutarPeticiónPersonajesMale() {
+  activarBotónEstilos(butPersonajes);
+  const resultadoObtenido = await petición(
+    `${url}/people/?page=${pagina}`,
+    opciones
+  );
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónPersonajesMale, 9);
+  let lista = [];
+
+  for (let personaje of resultadoObtenido.results) {
+    if (personaje.gender==="male"){
+      lista.push(personaje);
+    }
+  }
+
+  let listas = [];
+  for(personaje of lista){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(personaje);
+    }
+    listas.push(listaAgregar);
+  }
+
+  for(listaPersonajes of listas){
+    console.log(listaPersonajes);
+    for(personaje of listaPersonajes){
+      let personajeCard = crearElementoPersonaje(personaje);
+      containerPersonajes.appendChild(personajeCard);
+    }
+  }
+
+
+}
+
+
 async function ejecutarPeticiónPersonajes() {
   activarBotónEstilos(butPersonajes);
   const resultadoObtenido = await petición(
     `${url}/people/?page=${pagina}`,
     opciones
   );
+  console.log(resultadoObtenido);
   containerPersonajes.innerHTML = null;
   crearBotones(ejecutarPeticiónPersonajes, 9);
   console.log(resultadoObtenido.results);
