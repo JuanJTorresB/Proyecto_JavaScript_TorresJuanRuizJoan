@@ -1,36 +1,36 @@
-// Lógica Paginas
-
-var pagina = 1;
-
 //Dashboard Elementos y Eventos
 
 const butPersonajes = document.getElementById("butPersonajes");
 
+butPersonajes.addEventListener("click", ejecutarPeticiónPersonajes);
 butPersonajes.addEventListener("click", () => {
   pagina = 1;
 });
+<<<<<<< HEAD
 butPersonajes.addEventListener("click", ejecutarPeticiónPersonajesMale);
+=======
+>>>>>>> parent of 14ad082 (feat: :bug: Peticion Fuera de Rango)
 
 const butNaves = document.getElementById("butNaves");
 
+butNaves.addEventListener("click", ejecutarPeticiónNaves);
 butNaves.addEventListener("click", () => {
   pagina = 1;
 });
-butNaves.addEventListener("click", ejecutarPeticiónNaves);
 
 const butPlanetas = document.getElementById("butPlanetas");
 
+butPlanetas.addEventListener("click", ejecutarPeticiónPlanetas);
 butPlanetas.addEventListener("click", () => {
   pagina = 1;
 });
-butPlanetas.addEventListener("click", ejecutarPeticiónPlanetas);
 
 const butEspecies = document.getElementById("butEspecies");
 
+butEspecies.addEventListener("click", ejecutarPeticiónSpecies);
 butEspecies.addEventListener("click", () => {
   pagina = 1;
 });
-butEspecies.addEventListener("click", ejecutarPeticiónSpecies);
 
 //Headers
 
@@ -54,6 +54,9 @@ const petición = async (url, opciones) => {
 
 const url = "https://swapi.py4e.com/api/";
 
+// Lógica Paginas
+
+let pagina = 1;
 
 // containerPersonajes
 
@@ -76,7 +79,7 @@ const crearBotones = (section, maxPag) => {
   but1.innerHTML = `<div class="px-1 py-4">
   <div class="font-bold text-xl mb-2">Anterior</div>
   <button id="butAnterior" class="text-gray-700 text-base">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-32 h-32 text-[#818cf8]">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
   <path fill-rule="evenodd" d="M7.28 7.72a.75.75 0 0 1 0 1.06l-2.47 2.47H21a.75.75 0 0 1 0 1.5H4.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
 </svg>
 </button>
@@ -84,7 +87,7 @@ const crearBotones = (section, maxPag) => {
   but2 = document.createElement("div");
   but2.innerHTML = `<div class="px-1 py-4">
   <div class="font-bold text-xl mb-2">Siguiente</div>
-  <button id="butSiguiente" class="text-gray-700 text-base"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-32 h-32 text-[#818cf8]">
+  <button id="butSiguiente" class="text-gray-700 text-base"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
   <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
 </svg>
 </button>
