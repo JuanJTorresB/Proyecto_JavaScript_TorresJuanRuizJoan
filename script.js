@@ -6,7 +6,7 @@ butPersonajes.addEventListener("click", ejecutarPeticiónPersonajes);
 butPersonajes.addEventListener("click", () => {
   pagina = 1;
 });
-butPersonajes.addEventListener("click", ejecutarPeticiónPersonajesMale);
+butPersonajes.addEventListener("click", ejecutarPeticiónPersonajes);
 
 const butNaves = document.getElementById("butNaves");
 
@@ -117,45 +117,361 @@ const crearBotones = (section, maxPag) => {
   });
 };
 
-//Peticiones
+//Creacion de listas
 
-async function ejecutarPeticiónPersonajesMale() {
-  activarBotónEstilos(butPersonajes);
-  const resultadoObtenido = await petición(
-    `${url}/people/?page=${pagina}`,
-    opciones
-  );
-  containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónPersonajesMale, 9);
-  let lista = [];
-
-  for (let personaje of resultadoObtenido.results) {
-    if (personaje.gender==="male"){
-      lista.push(personaje);
+async function crearListaPersonajesGenero(genero) {
+  let personajesFiltrados = [];
+  for (let i=0; i<9; i++){
+    const resultadoObtenido = await petición(
+      `${url}/people/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let personaje of resultadoObtenido.results) {
+      if (personaje.gender===genero){
+        personajesFiltrados.push(personaje);
+      }
     }
   }
 
-  let listas = [];
-  for(personaje of lista){
+  let listaRetornar = [];
+
+  for (let j=0; j<=personajesFiltrados.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(personaje);
+      listaAgregar.push(personajesFiltrados[j]);
+      if(i!==8){
+        j+=1;
+      }
     }
-    listas.push(listaAgregar);
+
+    listaRetornar.push(listaAgregar);
+
   }
-
-  for(listaPersonajes of listas){
-    console.log(listaPersonajes);
-    for(personaje of listaPersonajes){
-      let personajeCard = crearElementoPersonaje(personaje);
-      containerPersonajes.appendChild(personajeCard);
-    }
-  }
-
-
+  return listaRetornar;
 }
 
+async function crearListaPersonajesEyeColor(color) {
+  let personajesFiltrados = [];
+  for (let i=0; i<9; i++){
+    const resultadoObtenido = await petición(
+      `${url}/people/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let personaje of resultadoObtenido.results) {
+      if (personaje.eye_color===color){
+        personajesFiltrados.push(personaje);
+      }
+    }
+  }
 
+  let listaRetornar = [];
+
+  for (let j=0; j<=personajesFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(personajesFiltrados[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaPersonajesHairColor(color) {
+  let personajesFiltrados = [];
+  for (let i=0; i<9; i++){
+    const resultadoObtenido = await petición(
+      `${url}/people/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let personaje of resultadoObtenido.results) {
+      if (personaje.hair_color===color){
+        personajesFiltrados.push(personaje);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=personajesFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(personajesFiltrados[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaPersonajesSkinColor(color) {
+  let personajesFiltrados = [];
+  for (let i=0; i<9; i++){
+    const resultadoObtenido = await petición(
+      `${url}/people/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let personaje of resultadoObtenido.results) {
+      if (personaje.skin_color===color){
+        personajesFiltrados.push(personaje);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=personajesFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(personajesFiltrados[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaNavesClase(clase) {
+  let navesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/starships/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let nave of resultadoObtenido.results) {
+      if (nave.starship_class===clase){
+        navesFiltradas.push(nave);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=navesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(navesFiltradas[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaNavesCostMayor(costo) {
+  let navesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/starships/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let nave of resultadoObtenido.results) {
+      if (nave.cost_in_credits>=costo && nave.cost_in_credits!=="unknown"){
+        navesFiltradas.push(nave);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=navesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(navesFiltradas[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaNavesCostMenor(costo) {
+  let navesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/starships/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let nave of resultadoObtenido.results) {
+      if (nave.cost_in_credits<=costo && nave.cost_in_credits!=="unknown"){
+        navesFiltradas.push(nave);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=navesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(navesFiltradas[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaNavesPasajerosMayor(pasajeros) {
+  let navesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/starships/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let nave of resultadoObtenido.results) {
+      if (nave.passengers>=pasajeros){
+        navesFiltradas.push(nave);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=navesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(navesFiltradas[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaNavesPasajerosMenor(pasajeros) {
+  let navesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/starships/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let nave of resultadoObtenido.results) {
+      if (nave.passengers<=pasajeros){
+        navesFiltradas.push(nave);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=navesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(navesFiltradas[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaNavesCapacidadCargaMayor(carga) {
+  let navesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/starships/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let nave of resultadoObtenido.results) {
+      if (nave.cargo_capacity>=carga){
+        navesFiltradas.push(nave);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=navesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(navesFiltradas[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaNavesCapacidadCargaMenor(carga) {
+  let navesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/starships/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let nave of resultadoObtenido.results) {
+      if (nave.cargo_capacity<=carga){
+        navesFiltradas.push(nave);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=navesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      listaAgregar.push(navesFiltradas[j]);
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+//Peticiones
 async function ejecutarPeticiónPersonajes() {
   activarBotónEstilos(butPersonajes);
   const resultadoObtenido = await petición(
@@ -169,6 +485,58 @@ async function ejecutarPeticiónPersonajes() {
   for (let personaje of resultadoObtenido.results) {
     let personajeCard = crearElementoPersonaje(personaje);
     containerPersonajes.appendChild(personajeCard);
+  }
+}
+
+async function ejecutarPeticiónPersonajesGenero(genero) {
+  activarBotónEstilos(butPersonajes);
+  let personajesFiltrados = await crearListaPersonajesGenero(genero);
+  console.log(personajesFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónPersonajesGenero, personajesFiltrados.length-1);
+
+  for(personaje of personajesFiltrados[pagina-1]){
+      let personajeCard = crearElementoPersonaje(personaje);
+      containerPersonajes.appendChild(personajeCard);
+  }
+}
+
+async function ejecutarPeticiónPersonajesEyeColor(color) {
+  activarBotónEstilos(butPersonajes);
+  let personajesFiltrados = await crearListaPersonajesEyeColor(color);
+  console.log(personajesFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónPersonajesEyeColor, personajesFiltrados.length-1);
+
+  for(personaje of personajesFiltrados[pagina-1]){
+      let personajeCard = crearElementoPersonaje(personaje);
+      containerPersonajes.appendChild(personajeCard);
+  }
+}
+
+async function ejecutarPeticiónPersonajesHairColor(color) {
+  activarBotónEstilos(butPersonajes);
+  let personajesFiltrados = await crearListaPersonajesHairColor(color);
+  console.log(personajesFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónPersonajesHairColor, personajesFiltrados.length-1);
+
+  for(personaje of personajesFiltrados[pagina-1]){
+      let personajeCard = crearElementoPersonaje(personaje);
+      containerPersonajes.appendChild(personajeCard);
+  }
+}
+
+async function ejecutarPeticiónPersonajesSkinColor(color) {
+  activarBotónEstilos(butPersonajes);
+  let personajesFiltrados = await crearListaPersonajesSkinColor(color);
+  console.log(personajesFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónPersonajesSkinColor, personajesFiltrados.length-1);
+
+  for(personaje of personajesFiltrados[pagina-1]){
+      let personajeCard = crearElementoPersonaje(personaje);
+      containerPersonajes.appendChild(personajeCard);
   }
 }
 
@@ -186,6 +554,98 @@ async function ejecutarPeticiónNaves() {
     containerPersonajes.appendChild(navesCard);
   }
 }
+
+async function ejecutarPeticiónNavesClase(clase) {
+  activarBotónEstilos(butPersonajes);
+  let navesFiltradas = await crearListaNavesClase(clase);
+  console.log(navesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónNavesClase, navesFiltradas.length-1);
+
+  for(nave of navesFiltradas[pagina-1]){
+      let navesCard = crearElementoNave(nave);
+      containerPersonajes.appendChild(navesCard);
+  }
+}
+
+async function ejecutarPeticiónNavesCostMayor(costo) {
+  activarBotónEstilos(butPersonajes);
+  let navesFiltradas = await crearListaNavesCostMayor(costo);
+  console.log(navesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónNavesCostMayor, navesFiltradas.length-1);
+
+  for(nave of navesFiltradas[pagina-1]){
+      let navesCard = crearElementoNave(nave);
+      containerPersonajes.appendChild(navesCard);
+  }
+}
+
+async function ejecutarPeticiónNavesCostMenor(costo) {
+  activarBotónEstilos(butPersonajes);
+  let navesFiltradas = await crearListaNavesCostMenor(costo);
+  console.log(navesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónNavesCostMenor, navesFiltradas.length-1);
+
+  for(nave of navesFiltradas[pagina-1]){
+      let navesCard = crearElementoNave(nave);
+      containerPersonajes.appendChild(navesCard);
+  }
+}
+
+async function ejecutarPeticiónNavesPasajerosMayor(pasajeros) {
+  activarBotónEstilos(butPersonajes);
+  let navesFiltradas = await crearListaNavesPasajerosMayor(pasajeros);
+  console.log(navesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónNavesPasajerosMayor, navesFiltradas.length-1);
+
+  for(nave of navesFiltradas[pagina-1]){
+      let navesCard = crearElementoNave(nave);
+      containerPersonajes.appendChild(navesCard);
+  }
+}
+
+async function ejecutarPeticiónNavesPasajerosMenor(pasajeros) {
+  activarBotónEstilos(butPersonajes);
+  let navesFiltradas = await crearListaNavesPasajerosMenor(pasajeros);
+  console.log(navesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónNavesPasajerosMenor, navesFiltradas.length-1);
+
+  for(nave of navesFiltradas[pagina-1]){
+      let navesCard = crearElementoNave(nave);
+      containerPersonajes.appendChild(navesCard);
+  }
+}
+
+async function ejecutarPeticiónNavesCapacidadCargaMayor(carga) {
+  activarBotónEstilos(butPersonajes);
+  let navesFiltradas = await crearListaNavesCapacidadCargaMayor(carga);
+  console.log(navesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónNavesCapacidadCargaMayor, navesFiltradas.length-1);
+
+  for(nave of navesFiltradas[pagina-1]){
+      let navesCard = crearElementoNave(nave);
+      containerPersonajes.appendChild(navesCard);
+  }
+}
+
+async function ejecutarPeticiónNavesCapacidadCargaMenor(carga) {
+  activarBotónEstilos(butPersonajes);
+  let navesFiltradas = await crearListaNavesCapacidadCargaMenor(carga);
+  console.log(navesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticiónNavesCapacidadCargaMenor, navesFiltradas.length-1);
+
+  for(nave of navesFiltradas[pagina-1]){
+      let navesCard = crearElementoNave(nave);
+      containerPersonajes.appendChild(navesCard);
+  }
+}
+
 
 async function ejecutarPeticiónPlanetas() {
   activarBotónEstilos(butPlanetas);
@@ -229,6 +689,7 @@ const crearElementoPersonaje = (dataPersonaje) => {
   <li><b>Height:</b> ${dataPersonaje.height} cm</li>
   <li><b>Hair Color:</b> ${dataPersonaje.hair_color}</li>
   <li><b>Eye Color:</b> ${dataPersonaje.eye_color} </li>
+  <li><b>Skin Color:</b> ${dataPersonaje.skin_color} </li>
     </ul>
     </div>`;
   console.log(elementoPersonaje);
