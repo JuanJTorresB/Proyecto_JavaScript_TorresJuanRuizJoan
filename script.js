@@ -6,7 +6,6 @@ butPersonajes.addEventListener("click", ejecutarPeticiónPersonajes);
 butPersonajes.addEventListener("click", () => {
   pagina = 1;
 });
-butPersonajes.addEventListener("click", ejecutarPeticiónPersonajes);
 
 const butNaves = document.getElementById("butNaves");
 
@@ -53,7 +52,7 @@ const url = "https://swapi.py4e.com/api/";
 
 // Lógica Paginas
 
-let pagina = 1;
+var pagina = 1;
 
 // containerPersonajes
 
@@ -61,7 +60,7 @@ const containerPersonajes = document.getElementById("containerPersonajes");
 
 //Creación Botones
 
-const crearBotones = (section, maxPag) => {
+const crearBotones = (section, maxPag, argg) => {
   but1 = document.createElement("div");
   but1.classList.add(
     "bg-white",
@@ -74,21 +73,21 @@ const crearBotones = (section, maxPag) => {
     "text-center"
   );
   but1.innerHTML = `<div class="px-1 py-4">
-  <div class="font-bold text-xl mb-2">Anterior</div>
-  <button id="butAnterior" class="text-gray-700 text-base">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-  <path fill-rule="evenodd" d="M7.28 7.72a.75.75 0 0 1 0 1.06l-2.47 2.47H21a.75.75 0 0 1 0 1.5H4.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
-</svg>
-</button>
-</div>`;
+    <div class="font-bold text-xl mb-2">Anterior</div>
+    <button id="butAnterior" class="text-gray-700 text-base">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+    <path fill-rule="evenodd" d="M7.28 7.72a.75.75 0 0 1 0 1.06l-2.47 2.47H21a.75.75 0 0 1 0 1.5H4.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+    </svg>
+    </button>
+    </div>`;
   but2 = document.createElement("div");
   but2.innerHTML = `<div class="px-1 py-4">
-  <div class="font-bold text-xl mb-2">Siguiente</div>
-  <button id="butSiguiente" class="text-gray-700 text-base"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-  <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-</svg>
-</button>
-</div>`;
+    <div class="font-bold text-xl mb-2">Siguiente</div>
+    <button id="butSiguiente" class="text-gray-700 text-base"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+    <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+    </svg>
+    </button>
+    </div>`;
   but2.classList.add(
     "bg-white",
     "rounded-lg",
@@ -105,15 +104,17 @@ const crearBotones = (section, maxPag) => {
     event.preventDefault();
     if (pagina > 1) {
       pagina -= 1;
+      section(argg);
     }
-    section();
+    console.log(pagina)
   });
   butSiguiente.addEventListener("click", () => {
     event.preventDefault();
     if (pagina >= 1 && pagina < maxPag) {
       pagina += 1;
-      section();
+      section(argg);
     }
+    console.log(pagina)
   });
 };
 
@@ -121,14 +122,14 @@ const crearBotones = (section, maxPag) => {
 
 async function crearListaPersonajesGenero(genero) {
   let personajesFiltrados = [];
-  for (let i=0; i<9; i++){
+  for (let i = 0; i < 9; i++) {
     const resultadoObtenido = await petición(
-      `${url}/people/?page=${i+1}`,
+      `${url}/people/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.gender.includes(genero)){
+      if (personaje.gender.includes(genero)) {
         personajesFiltrados.push(personaje);
       }
     }
@@ -136,14 +137,14 @@ async function crearListaPersonajesGenero(genero) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=personajesFiltrados.length;j++){
+  for (let j = 0; j <= personajesFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(personajesFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (personajesFiltrados[j] !== undefined) {
         listaAgregar.push(personajesFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -155,14 +156,14 @@ async function crearListaPersonajesGenero(genero) {
 
 async function crearListaPersonajesEyeColor(color) {
   let personajesFiltrados = [];
-  for (let i=0; i<9; i++){
+  for (let i = 0; i < 9; i++) {
     const resultadoObtenido = await petición(
-      `${url}/people/?page=${i+1}`,
+      `${url}/people/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.eye_color.includes(color)){
+      if (personaje.eye_color.includes(color)) {
         personajesFiltrados.push(personaje);
       }
     }
@@ -170,14 +171,14 @@ async function crearListaPersonajesEyeColor(color) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=personajesFiltrados.length;j++){
+  for (let j = 0; j <= personajesFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(personajesFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (personajesFiltrados[j] !== undefined) {
         listaAgregar.push(personajesFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -189,14 +190,14 @@ async function crearListaPersonajesEyeColor(color) {
 
 async function crearListaPersonajesHairColor(color) {
   let personajesFiltrados = [];
-  for (let i=0; i<9; i++){
+  for (let i = 0; i < 9; i++) {
     const resultadoObtenido = await petición(
-      `${url}/people/?page=${i+1}`,
+      `${url}/people/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.hair_color.includes(color)){
+      if (personaje.hair_color.includes(color)) {
         personajesFiltrados.push(personaje);
       }
     }
@@ -204,14 +205,14 @@ async function crearListaPersonajesHairColor(color) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=personajesFiltrados.length;j++){
+  for (let j = 0; j <= personajesFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(personajesFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (personajesFiltrados[j] !== undefined) {
         listaAgregar.push(personajesFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -223,14 +224,14 @@ async function crearListaPersonajesHairColor(color) {
 
 async function crearListaPersonajesSkinColor(color) {
   let personajesFiltrados = [];
-  for (let i=0; i<9; i++){
+  for (let i = 0; i < 9; i++) {
     const resultadoObtenido = await petición(
-      `${url}/people/?page=${i+1}`,
+      `${url}/people/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.skin_color.includes(color)){
+      if (personaje.skin_color.includes(color)) {
         personajesFiltrados.push(personaje);
       }
     }
@@ -238,15 +239,15 @@ async function crearListaPersonajesSkinColor(color) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=personajesFiltrados.length;j++){
+  for (let j = 0; j <= personajesFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(personajesFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (personajesFiltrados[j] !== undefined) {
         listaAgregar.push(personajesFiltrados[j]);
       }
-      
-      if(i!==8){
-        j+=1;
+
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -258,14 +259,14 @@ async function crearListaPersonajesSkinColor(color) {
 
 async function crearListaNavesClase(clase) {
   let navesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/starships/?page=${i+1}`,
+      `${url}/starships/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let nave of resultadoObtenido.results) {
-      if (nave.starship_class===clase){
+      if (nave.starship_class === clase) {
         navesFiltradas.push(nave);
       }
     }
@@ -273,14 +274,14 @@ async function crearListaNavesClase(clase) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=navesFiltradas.length;j++){
+  for (let j = 0; j <= navesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(navesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (navesFiltradas[j] !== undefined) {
         listaAgregar.push(navesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -292,14 +293,14 @@ async function crearListaNavesClase(clase) {
 
 async function crearListaNavesCostMayor(costo) {
   let navesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/starships/?page=${i+1}`,
+      `${url}/starships/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let nave of resultadoObtenido.results) {
-      if (nave.cost_in_credits>=costo && nave.cost_in_credits!=="unknown"){
+      if (nave.cost_in_credits >= costo && nave.cost_in_credits !== "unknown") {
         navesFiltradas.push(nave);
       }
     }
@@ -307,14 +308,14 @@ async function crearListaNavesCostMayor(costo) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=navesFiltradas.length;j++){
+  for (let j = 0; j <= navesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(navesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (navesFiltradas[j] !== undefined) {
         listaAgregar.push(navesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -326,14 +327,14 @@ async function crearListaNavesCostMayor(costo) {
 
 async function crearListaNavesCostMenor(costo) {
   let navesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/starships/?page=${i+1}`,
+      `${url}/starships/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let nave of resultadoObtenido.results) {
-      if (nave.cost_in_credits<=costo && nave.cost_in_credits!=="unknown"){
+      if (nave.cost_in_credits <= costo && nave.cost_in_credits !== "unknown") {
         navesFiltradas.push(nave);
       }
     }
@@ -341,14 +342,14 @@ async function crearListaNavesCostMenor(costo) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=navesFiltradas.length;j++){
+  for (let j = 0; j <= navesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(navesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (navesFiltradas[j] !== undefined) {
         listaAgregar.push(navesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -360,14 +361,14 @@ async function crearListaNavesCostMenor(costo) {
 
 async function crearListaNavesPasajerosMayor(pasajeros) {
   let navesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/starships/?page=${i+1}`,
+      `${url}/starships/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let nave of resultadoObtenido.results) {
-      if (nave.passengers>=pasajeros){
+      if (nave.passengers >= pasajeros) {
         navesFiltradas.push(nave);
       }
     }
@@ -375,14 +376,14 @@ async function crearListaNavesPasajerosMayor(pasajeros) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=navesFiltradas.length;j++){
+  for (let j = 0; j <= navesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(navesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (navesFiltradas[j] !== undefined) {
         listaAgregar.push(navesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -394,14 +395,14 @@ async function crearListaNavesPasajerosMayor(pasajeros) {
 
 async function crearListaNavesPasajerosMenor(pasajeros) {
   let navesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/starships/?page=${i+1}`,
+      `${url}/starships/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let nave of resultadoObtenido.results) {
-      if (nave.passengers<=pasajeros){
+      if (nave.passengers <= pasajeros) {
         navesFiltradas.push(nave);
       }
     }
@@ -409,14 +410,14 @@ async function crearListaNavesPasajerosMenor(pasajeros) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=navesFiltradas.length;j++){
+  for (let j = 0; j <= navesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(navesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (navesFiltradas[j] !== undefined) {
         listaAgregar.push(navesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -428,14 +429,14 @@ async function crearListaNavesPasajerosMenor(pasajeros) {
 
 async function crearListaNavesCapacidadCargaMayor(carga) {
   let navesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/starships/?page=${i+1}`,
+      `${url}/starships/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let nave of resultadoObtenido.results) {
-      if (nave.cargo_capacity>=carga){
+      if (nave.cargo_capacity >= carga) {
         navesFiltradas.push(nave);
       }
     }
@@ -443,14 +444,14 @@ async function crearListaNavesCapacidadCargaMayor(carga) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=navesFiltradas.length;j++){
+  for (let j = 0; j <= navesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(navesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (navesFiltradas[j] !== undefined) {
         listaAgregar.push(navesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -462,14 +463,14 @@ async function crearListaNavesCapacidadCargaMayor(carga) {
 
 async function crearListaNavesCapacidadCargaMenor(carga) {
   let navesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/starships/?page=${i+1}`,
+      `${url}/starships/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let nave of resultadoObtenido.results) {
-      if (nave.cargo_capacity<=carga){
+      if (nave.cargo_capacity <= carga) {
         navesFiltradas.push(nave);
       }
     }
@@ -477,15 +478,15 @@ async function crearListaNavesCapacidadCargaMenor(carga) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=navesFiltradas.length;j++){
+  for (let j = 0; j <= navesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(navesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (navesFiltradas[j] !== undefined) {
         listaAgregar.push(navesFiltradas[j]);
       }
-      
-      if(i!==8){
-        j+=1;
+
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -497,14 +498,14 @@ async function crearListaNavesCapacidadCargaMenor(carga) {
 
 async function crearListaPlanetasClima(clima) {
   let planetasFiltrados = [];
-  for (let i=0; i<5; i++){
+  for (let i = 0; i < 5; i++) {
     const resultadoObtenido = await petición(
-      `${url}/planets/?page=${i+1}`,
+      `${url}/planets/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let planeta of resultadoObtenido.results) {
-      if (planeta.climate.includes(clima)){
+      if (planeta.climate.includes(clima)) {
         planetasFiltrados.push(planeta);
       }
     }
@@ -512,14 +513,14 @@ async function crearListaPlanetasClima(clima) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=planetasFiltrados.length;j++){
+  for (let j = 0; j <= planetasFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(planetasFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (planetasFiltrados[j] !== undefined) {
         listaAgregar.push(planetasFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -531,14 +532,14 @@ async function crearListaPlanetasClima(clima) {
 
 async function crearListaPlanetasTerreno(terreno) {
   let planetasFiltrados = [];
-  for (let i=0; i<5; i++){
+  for (let i = 0; i < 5; i++) {
     const resultadoObtenido = await petición(
-      `${url}/planets/?page=${i+1}`,
+      `${url}/planets/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let planeta of resultadoObtenido.results) {
-      if (planeta.terrain.includes(terreno)){
+      if (planeta.terrain.includes(terreno)) {
         planetasFiltrados.push(planeta);
       }
     }
@@ -546,14 +547,14 @@ async function crearListaPlanetasTerreno(terreno) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=planetasFiltrados.length;j++){
+  for (let j = 0; j <= planetasFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(planetasFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (planetasFiltrados[j] !== undefined) {
         listaAgregar.push(planetasFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -565,14 +566,14 @@ async function crearListaPlanetasTerreno(terreno) {
 
 async function crearListaPlanetasPoblacionMayor(poblacion) {
   let planetasFiltrados = [];
-  for (let i=0; i<5; i++){
+  for (let i = 0; i < 5; i++) {
     const resultadoObtenido = await petición(
-      `${url}/planets/?page=${i+1}`,
+      `${url}/planets/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let planeta of resultadoObtenido.results) {
-      if (planeta.population>=poblacion && planeta.population!=="unknown"){
+      if (planeta.population >= poblacion && planeta.population !== "unknown") {
         planetasFiltrados.push(planeta);
       }
     }
@@ -580,14 +581,14 @@ async function crearListaPlanetasPoblacionMayor(poblacion) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=planetasFiltrados.length;j++){
+  for (let j = 0; j <= planetasFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(planetasFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (planetasFiltrados[j] !== undefined) {
         listaAgregar.push(planetasFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -599,14 +600,14 @@ async function crearListaPlanetasPoblacionMayor(poblacion) {
 
 async function crearListaPlanetasPoblacionMenor(poblacion) {
   let planetasFiltrados = [];
-  for (let i=0; i<5; i++){
+  for (let i = 0; i < 5; i++) {
     const resultadoObtenido = await petición(
-      `${url}/planets/?page=${i+1}`,
+      `${url}/planets/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let planeta of resultadoObtenido.results) {
-      if (planeta.population<=poblacion && planeta.population!=="unknown"){
+      if (planeta.population <= poblacion && planeta.population !== "unknown") {
         planetasFiltrados.push(planeta);
       }
     }
@@ -614,14 +615,14 @@ async function crearListaPlanetasPoblacionMenor(poblacion) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=planetasFiltrados.length;j++){
+  for (let j = 0; j <= planetasFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(planetasFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (planetasFiltrados[j] !== undefined) {
         listaAgregar.push(planetasFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -634,14 +635,14 @@ async function crearListaPlanetasPoblacionMenor(poblacion) {
 
 async function crearListaPlanetasDiametroMayor(diametro) {
   let planetasFiltrados = [];
-  for (let i=0; i<5; i++){
+  for (let i = 0; i < 5; i++) {
     const resultadoObtenido = await petición(
-      `${url}/planets/?page=${i+1}`,
+      `${url}/planets/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let planeta of resultadoObtenido.results) {
-      if (planeta.diameter>=diametro){
+      if (planeta.diameter >= diametro) {
         planetasFiltrados.push(planeta);
       }
     }
@@ -649,14 +650,14 @@ async function crearListaPlanetasDiametroMayor(diametro) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=planetasFiltrados.length;j++){
+  for (let j = 0; j <= planetasFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(planetasFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (planetasFiltrados[j] !== undefined) {
         listaAgregar.push(planetasFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -668,14 +669,14 @@ async function crearListaPlanetasDiametroMayor(diametro) {
 
 async function crearListaPlanetasDiametroMenor(diametro) {
   let planetasFiltrados = [];
-  for (let i=0; i<5; i++){
+  for (let i = 0; i < 5; i++) {
     const resultadoObtenido = await petición(
-      `${url}/planets/?page=${i+1}`,
+      `${url}/planets/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let planeta of resultadoObtenido.results) {
-      if (planeta.diameter<=diametro){
+      if (planeta.diameter <= diametro) {
         planetasFiltrados.push(planeta);
       }
     }
@@ -683,14 +684,14 @@ async function crearListaPlanetasDiametroMenor(diametro) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=planetasFiltrados.length;j++){
+  for (let j = 0; j <= planetasFiltrados.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(planetasFiltrados[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (planetasFiltrados[j] !== undefined) {
         listaAgregar.push(planetasFiltrados[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -702,14 +703,14 @@ async function crearListaPlanetasDiametroMenor(diametro) {
 
 async function crearListaEspeciesClasificacion(clasificacion) {
   let especiesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/species/?page=${i+1}`,
+      `${url}/species/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let especie of resultadoObtenido.results) {
-      if (especie.classification===clasificacion){
+      if (especie.classification === clasificacion) {
         especiesFiltradas.push(especie);
       }
     }
@@ -717,14 +718,14 @@ async function crearListaEspeciesClasificacion(clasificacion) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=especiesFiltradas.length;j++){
+  for (let j = 0; j <= especiesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(especiesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (especiesFiltradas[j] !== undefined) {
         listaAgregar.push(especiesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -736,14 +737,14 @@ async function crearListaEspeciesClasificacion(clasificacion) {
 
 async function crearListaEspeciesLenguaje(lenguaje) {
   let especiesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/species/?page=${i+1}`,
+      `${url}/species/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let especie of resultadoObtenido.results) {
-      if (especie.language.includes(lenguaje)){
+      if (especie.language.includes(lenguaje)) {
         especiesFiltradas.push(especie);
       }
     }
@@ -751,14 +752,14 @@ async function crearListaEspeciesLenguaje(lenguaje) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=especiesFiltradas.length;j++){
+  for (let j = 0; j <= especiesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(especiesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (especiesFiltradas[j] !== undefined) {
         listaAgregar.push(especiesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -770,14 +771,14 @@ async function crearListaEspeciesLenguaje(lenguaje) {
 
 async function crearListaEspeciesEdadMayor(edad) {
   let especiesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/species/?page=${i+1}`,
+      `${url}/species/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let especie of resultadoObtenido.results) {
-      if (especie.average_lifespan>=edad &&especie.average_lifespan!=="unknown"){
+      if (especie.average_lifespan >= edad && especie.average_lifespan !== "unknown") {
         especiesFiltradas.push(especie);
       }
     }
@@ -785,14 +786,14 @@ async function crearListaEspeciesEdadMayor(edad) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=especiesFiltradas.length;j++){
+  for (let j = 0; j <= especiesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(especiesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (especiesFiltradas[j] !== undefined) {
         listaAgregar.push(especiesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -804,14 +805,14 @@ async function crearListaEspeciesEdadMayor(edad) {
 
 async function crearListaEspeciesEdadMenor(edad) {
   let especiesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/species/?page=${i+1}`,
+      `${url}/species/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let especie of resultadoObtenido.results) {
-      if (especie.average_lifespan<=edad &&especie.average_lifespan!=="unknown"){
+      if (especie.average_lifespan <= edad && especie.average_lifespan !== "unknown") {
         especiesFiltradas.push(especie);
       }
     }
@@ -819,14 +820,14 @@ async function crearListaEspeciesEdadMenor(edad) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=especiesFiltradas.length;j++){
+  for (let j = 0; j <= especiesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(especiesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (especiesFiltradas[j] !== undefined) {
         listaAgregar.push(especiesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -838,14 +839,14 @@ async function crearListaEspeciesEdadMenor(edad) {
 
 async function crearListaEspeciesAlturaMayor(altura) {
   let especiesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/species/?page=${i+1}`,
+      `${url}/species/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let especie of resultadoObtenido.results) {
-      if (especie.average_height>=altura &&especie.average_height!=="unknown"){
+      if (especie.average_height >= altura && especie.average_height !== "unknown") {
         especiesFiltradas.push(especie);
       }
     }
@@ -853,14 +854,14 @@ async function crearListaEspeciesAlturaMayor(altura) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=especiesFiltradas.length;j++){
+  for (let j = 0; j <= especiesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(especiesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (especiesFiltradas[j] !== undefined) {
         listaAgregar.push(especiesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -872,14 +873,14 @@ async function crearListaEspeciesAlturaMayor(altura) {
 
 async function crearListaEspeciesAlturaMenor(altura) {
   let especiesFiltradas = [];
-  for (let i=0; i<4; i++){
+  for (let i = 0; i < 4; i++) {
     const resultadoObtenido = await petición(
-      `${url}/species/?page=${i+1}`,
+      `${url}/species/?page=${i + 1}`,
       opciones
     );
-    
+
     for (let especie of resultadoObtenido.results) {
-      if (especie.average_height<=altura &&especie.average_height!=="unknown"){
+      if (especie.average_height <= altura && especie.average_height !== "unknown") {
         especiesFiltradas.push(especie);
       }
     }
@@ -887,14 +888,14 @@ async function crearListaEspeciesAlturaMenor(altura) {
 
   let listaRetornar = [];
 
-  for (let j=0; j<=especiesFiltradas.length;j++){
+  for (let j = 0; j <= especiesFiltradas.length; j++) {
     let listaAgregar = [];
-    for(let i=0;i<=9;i++){
-      if(especiesFiltradas[j]!==undefined){
+    for (let i = 0; i <= 9; i++) {
+      if (especiesFiltradas[j] !== undefined) {
         listaAgregar.push(especiesFiltradas[j]);
       }
-      if(i!==8){
-        j+=1;
+      if (i !== 8) {
+        j += 1;
       }
     }
 
@@ -905,7 +906,7 @@ async function crearListaEspeciesAlturaMenor(altura) {
 }
 
 //Peticiones
-async function ejecutarPeticiónPersonajes() {
+async function ejecutarPeticiónPersonajes(ignore) {
   activarBotónEstilos(butPersonajes);
   const resultadoObtenido = await petición(
     `${url}/people/?page=${pagina}`,
@@ -913,7 +914,7 @@ async function ejecutarPeticiónPersonajes() {
   );
   console.log(resultadoObtenido);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónPersonajes, 9);
+  crearBotones(ejecutarPeticiónPersonajes, 9, ignore);
   console.log(resultadoObtenido.results);
   for (let personaje of resultadoObtenido.results) {
     let personajeCard = crearElementoPersonaje(personaje);
@@ -926,11 +927,11 @@ async function ejecutarPeticiónPersonajesGenero(genero) {
   let personajesFiltrados = await crearListaPersonajesGenero(genero);
   console.log(personajesFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónPersonajesGenero, personajesFiltrados.length-1);
+  crearBotones(ejecutarPeticiónPersonajesGenero, personajesFiltrados.length - 1, genero);
 
-  for(personaje of personajesFiltrados[pagina-1]){
-      let personajeCard = crearElementoPersonaje(personaje);
-      containerPersonajes.appendChild(personajeCard);
+  for (personaje of personajesFiltrados[pagina - 1]) {
+    let personajeCard = crearElementoPersonaje(personaje);
+    containerPersonajes.appendChild(personajeCard);
   }
 }
 
@@ -939,11 +940,11 @@ async function ejecutarPeticiónPersonajesEyeColor(color) {
   let personajesFiltrados = await crearListaPersonajesEyeColor(color);
   console.log(personajesFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónPersonajesEyeColor, personajesFiltrados.length-1);
+  crearBotones(ejecutarPeticiónPersonajesEyeColor, personajesFiltrados.length - 1, color);
 
-  for(personaje of personajesFiltrados[pagina-1]){
-      let personajeCard = crearElementoPersonaje(personaje);
-      containerPersonajes.appendChild(personajeCard);
+  for (personaje of personajesFiltrados[pagina - 1]) {
+    let personajeCard = crearElementoPersonaje(personaje);
+    containerPersonajes.appendChild(personajeCard);
   }
 }
 
@@ -952,11 +953,11 @@ async function ejecutarPeticiónPersonajesHairColor(color) {
   let personajesFiltrados = await crearListaPersonajesHairColor(color);
   console.log(personajesFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónPersonajesHairColor, personajesFiltrados.length-1);
+  crearBotones(ejecutarPeticiónPersonajesHairColor, personajesFiltrados.length - 1, color);
 
-  for(personaje of personajesFiltrados[pagina-1]){
-      let personajeCard = crearElementoPersonaje(personaje);
-      containerPersonajes.appendChild(personajeCard);
+  for (personaje of personajesFiltrados[pagina - 1]) {
+    let personajeCard = crearElementoPersonaje(personaje);
+    containerPersonajes.appendChild(personajeCard);
   }
 }
 
@@ -965,15 +966,15 @@ async function ejecutarPeticiónPersonajesSkinColor(color) {
   let personajesFiltrados = await crearListaPersonajesSkinColor(color);
   console.log(personajesFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónPersonajesSkinColor, personajesFiltrados.length-1);
+  crearBotones(ejecutarPeticiónPersonajesSkinColor, personajesFiltrados.length - 1, color);
 
-  for(personaje of personajesFiltrados[pagina-1]){
-      let personajeCard = crearElementoPersonaje(personaje);
-      containerPersonajes.appendChild(personajeCard);
+  for (personaje of personajesFiltrados[pagina - 1]) {
+    let personajeCard = crearElementoPersonaje(personaje);
+    containerPersonajes.appendChild(personajeCard);
   }
 }
 
-async function ejecutarPeticiónNaves() {
+async function ejecutarPeticiónNaves(ignore) {
   activarBotónEstilos(butNaves);
   const resultadoObtenido = await petición(
     `${url}/starships/?page=${pagina}`,
@@ -993,11 +994,11 @@ async function ejecutarPeticiónNavesClase(clase) {
   let navesFiltradas = await crearListaNavesClase(clase);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesClase, navesFiltradas.length-1);
+  crearBotones(ejecutarPeticiónNavesClase, navesFiltradas.length - 1);
 
-  for(nave of navesFiltradas[pagina-1]){
-      let navesCard = crearElementoNave(nave);
-      containerPersonajes.appendChild(navesCard);
+  for (nave of navesFiltradas[pagina - 1]) {
+    let navesCard = crearElementoNave(nave);
+    containerPersonajes.appendChild(navesCard);
   }
 }
 
@@ -1006,11 +1007,11 @@ async function ejecutarPeticiónNavesCostMayor(costo) {
   let navesFiltradas = await crearListaNavesCostMayor(costo);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesCostMayor, navesFiltradas.length-1);
+  crearBotones(ejecutarPeticiónNavesCostMayor, navesFiltradas.length - 1);
 
-  for(nave of navesFiltradas[pagina-1]){
-      let navesCard = crearElementoNave(nave);
-      containerPersonajes.appendChild(navesCard);
+  for (nave of navesFiltradas[pagina - 1]) {
+    let navesCard = crearElementoNave(nave);
+    containerPersonajes.appendChild(navesCard);
   }
 }
 
@@ -1019,11 +1020,11 @@ async function ejecutarPeticiónNavesCostMenor(costo) {
   let navesFiltradas = await crearListaNavesCostMenor(costo);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesCostMenor, navesFiltradas.length-1);
+  crearBotones(ejecutarPeticiónNavesCostMenor, navesFiltradas.length - 1);
 
-  for(nave of navesFiltradas[pagina-1]){
-      let navesCard = crearElementoNave(nave);
-      containerPersonajes.appendChild(navesCard);
+  for (nave of navesFiltradas[pagina - 1]) {
+    let navesCard = crearElementoNave(nave);
+    containerPersonajes.appendChild(navesCard);
   }
 }
 
@@ -1032,11 +1033,11 @@ async function ejecutarPeticiónNavesPasajerosMayor(pasajeros) {
   let navesFiltradas = await crearListaNavesPasajerosMayor(pasajeros);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesPasajerosMayor, navesFiltradas.length-1);
+  crearBotones(ejecutarPeticiónNavesPasajerosMayor, navesFiltradas.length - 1);
 
-  for(nave of navesFiltradas[pagina-1]){
-      let navesCard = crearElementoNave(nave);
-      containerPersonajes.appendChild(navesCard);
+  for (nave of navesFiltradas[pagina - 1]) {
+    let navesCard = crearElementoNave(nave);
+    containerPersonajes.appendChild(navesCard);
   }
 }
 
@@ -1045,11 +1046,11 @@ async function ejecutarPeticiónNavesPasajerosMenor(pasajeros) {
   let navesFiltradas = await crearListaNavesPasajerosMenor(pasajeros);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesPasajerosMenor, navesFiltradas.length-1);
+  crearBotones(ejecutarPeticiónNavesPasajerosMenor, navesFiltradas.length - 1);
 
-  for(nave of navesFiltradas[pagina-1]){
-      let navesCard = crearElementoNave(nave);
-      containerPersonajes.appendChild(navesCard);
+  for (nave of navesFiltradas[pagina - 1]) {
+    let navesCard = crearElementoNave(nave);
+    containerPersonajes.appendChild(navesCard);
   }
 }
 
@@ -1058,11 +1059,11 @@ async function ejecutarPeticiónNavesCapacidadCargaMayor(carga) {
   let navesFiltradas = await crearListaNavesCapacidadCargaMayor(carga);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesCapacidadCargaMayor, navesFiltradas.length-1);
+  crearBotones(ejecutarPeticiónNavesCapacidadCargaMayor, navesFiltradas.length - 1);
 
-  for(nave of navesFiltradas[pagina-1]){
-      let navesCard = crearElementoNave(nave);
-      containerPersonajes.appendChild(navesCard);
+  for (nave of navesFiltradas[pagina - 1]) {
+    let navesCard = crearElementoNave(nave);
+    containerPersonajes.appendChild(navesCard);
   }
 }
 
@@ -1071,16 +1072,16 @@ async function ejecutarPeticiónNavesCapacidadCargaMenor(carga) {
   let navesFiltradas = await crearListaNavesCapacidadCargaMenor(carga);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesCapacidadCargaMenor, navesFiltradas.length-1);
+  crearBotones(ejecutarPeticiónNavesCapacidadCargaMenor, navesFiltradas.length - 1);
 
-  for(nave of navesFiltradas[pagina-1]){
-      let navesCard = crearElementoNave(nave);
-      containerPersonajes.appendChild(navesCard);
+  for (nave of navesFiltradas[pagina - 1]) {
+    let navesCard = crearElementoNave(nave);
+    containerPersonajes.appendChild(navesCard);
   }
 }
 
 
-async function ejecutarPeticiónPlanetas() {
+async function ejecutarPeticiónPlanetas(ignore) {
   activarBotónEstilos(butPlanetas);
   const resultadoObtenido = await petición(
     `${url}/planets/?page=${pagina}`,
@@ -1100,9 +1101,9 @@ async function ejecutarPeticionPlanetasClima(clima) {
   let planetasFiltrados = await crearListaPlanetasClima(clima);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasClima, planetasFiltrados.length-1);
+  crearBotones(ejecutarPeticionPlanetasClima, planetasFiltrados.length - 1);
 
-  for(planeta of planetasFiltrados[pagina-1]){
+  for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
     containerPersonajes.appendChild(planetaCard);
   }
@@ -1113,9 +1114,9 @@ async function ejecutarPeticionPlanetasTerreno(terreno) {
   let planetasFiltrados = await crearListaPlanetasTerreno(terreno);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasTerreno, planetasFiltrados.length-1);
+  crearBotones(ejecutarPeticionPlanetasTerreno, planetasFiltrados.length - 1);
 
-  for(planeta of planetasFiltrados[pagina-1]){
+  for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
     containerPersonajes.appendChild(planetaCard);
   }
@@ -1126,9 +1127,9 @@ async function ejecutarPeticionPlanetasPoblacionMayor(poblacion) {
   let planetasFiltrados = await crearListaPlanetasPoblacionMayor(poblacion);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasPoblacionMayor, planetasFiltrados.length-1);
+  crearBotones(ejecutarPeticionPlanetasPoblacionMayor, planetasFiltrados.length - 1);
 
-  for(planeta of planetasFiltrados[pagina-1]){
+  for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
     containerPersonajes.appendChild(planetaCard);
   }
@@ -1139,9 +1140,9 @@ async function ejecutarPeticionPlanetasPoblacionMenor(poblacion) {
   let planetasFiltrados = await crearListaPlanetasPoblacionMenor(poblacion);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasPoblacionMenor, planetasFiltrados.length-1);
+  crearBotones(ejecutarPeticionPlanetasPoblacionMenor, planetasFiltrados.length - 1);
 
-  for(planeta of planetasFiltrados[pagina-1]){
+  for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
     containerPersonajes.appendChild(planetaCard);
   }
@@ -1152,9 +1153,9 @@ async function ejecutarPeticionPlanetasDiametroMayor(diametro) {
   let planetasFiltrados = await crearListaPlanetasDiametroMayor(diametro);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasDiametroMayor, planetasFiltrados.length-1);
+  crearBotones(ejecutarPeticionPlanetasDiametroMayor, planetasFiltrados.length - 1);
 
-  for(planeta of planetasFiltrados[pagina-1]){
+  for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
     containerPersonajes.appendChild(planetaCard);
   }
@@ -1165,15 +1166,15 @@ async function ejecutarPeticionPlanetasDiametroMenor(diametro) {
   let planetasFiltrados = await crearListaPlanetasDiametroMenor(diametro);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasDiametroMenor, planetasFiltrados.length-1);
+  crearBotones(ejecutarPeticionPlanetasDiametroMenor, planetasFiltrados.length - 1);
 
-  for(planeta of planetasFiltrados[pagina-1]){
+  for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
     containerPersonajes.appendChild(planetaCard);
   }
 }
 
-async function ejecutarPeticiónSpecies() {
+async function ejecutarPeticiónSpecies(ignore) {
   activarBotónEstilos(butEspecies);
   const resultadoObtenido = await petición(
     `${url}/species/?page=${pagina}`,
@@ -1193,9 +1194,9 @@ async function ejecutarPeticionEspeciesClasificacion(clasificacion) {
   let especiesFiltradas = await crearListaEspeciesClasificacion(clasificacion);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesClasificacion, especiesFiltradas.length-1);
+  crearBotones(ejecutarPeticionEspeciesClasificacion, especiesFiltradas.length - 1);
 
-  for(especie of especiesFiltradas[pagina-1]){
+  for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
     containerPersonajes.appendChild(especiesCard);
   }
@@ -1206,9 +1207,9 @@ async function ejecutarPeticionEspeciesLenguaje(lenguaje) {
   let especiesFiltradas = await crearListaEspeciesLenguaje(lenguaje);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesLenguaje, especiesFiltradas.length-1);
+  crearBotones(ejecutarPeticionEspeciesLenguaje, especiesFiltradas.length - 1);
 
-  for(especie of especiesFiltradas[pagina-1]){
+  for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
     containerPersonajes.appendChild(especiesCard);
   }
@@ -1219,9 +1220,9 @@ async function ejecutarPeticionEspeciesEdadMayor(edad) {
   let especiesFiltradas = await crearListaEspeciesEdadMayor(edad);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesEdadMayor, especiesFiltradas.length-1);
+  crearBotones(ejecutarPeticionEspeciesEdadMayor, especiesFiltradas.length - 1);
 
-  for(especie of especiesFiltradas[pagina-1]){
+  for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
     containerPersonajes.appendChild(especiesCard);
   }
@@ -1232,9 +1233,9 @@ async function ejecutarPeticionEspeciesEdadMenor(edad) {
   let especiesFiltradas = await crearListaEspeciesEdadMenor(edad);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesEdadMenor, especiesFiltradas.length-1);
+  crearBotones(ejecutarPeticionEspeciesEdadMenor, especiesFiltradas.length - 1);
 
-  for(especie of especiesFiltradas[pagina-1]){
+  for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
     containerPersonajes.appendChild(especiesCard);
   }
@@ -1245,9 +1246,9 @@ async function ejecutarPeticionEspeciesAlturaMayor(altura) {
   let especiesFiltradas = await crearListaEspeciesAlturaMayor(altura);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesAlturaMayor, especiesFiltradas.length-1);
+  crearBotones(ejecutarPeticionEspeciesAlturaMayor, especiesFiltradas.length - 1);
 
-  for(especie of especiesFiltradas[pagina-1]){
+  for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
     containerPersonajes.appendChild(especiesCard);
   }
@@ -1258,9 +1259,9 @@ async function ejecutarPeticionEspeciesAlturaMenor(altura) {
   let especiesFiltradas = await crearListaEspeciesAlturaMenor(altura);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesAlturaMenor, especiesFiltradas.length-1);
+  crearBotones(ejecutarPeticionEspeciesAlturaMenor, especiesFiltradas.length - 1);
 
-  for(especie of especiesFiltradas[pagina-1]){
+  for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
     containerPersonajes.appendChild(especiesCard);
   }
@@ -1273,13 +1274,13 @@ const crearElementoPersonaje = (dataPersonaje) => {
   let elementoPersonaje = document.createElement("div");
   elementoPersonaje.classList.add("bg-white", "rounded-lg", "border", "p-4");
   elementoPersonaje.innerHTML = `<div class="px-1 py-4">
-  <div class="font-bold text-xl mb-2">${dataPersonaje.name}</div>
-  <ul class="text-gray-700 text-base">
-  <li><b>Gender:</b> ${dataPersonaje.gender}</li>
-  <li><b>Height:</b> ${dataPersonaje.height} cm</li>
-  <li><b>Hair Color:</b> ${dataPersonaje.hair_color}</li>
-  <li><b>Eye Color:</b> ${dataPersonaje.eye_color} </li>
-  <li><b>Skin Color:</b> ${dataPersonaje.skin_color} </li>
+    <div class="font-bold text-xl mb-2">${dataPersonaje.name}</div>
+    <ul class="text-gray-700 text-base">
+    <li><b>Gender:</b> ${dataPersonaje.gender}</li>
+    <li><b>Height:</b> ${dataPersonaje.height} cm</li>
+    <li><b>Hair Color:</b> ${dataPersonaje.hair_color}</li>
+    <li><b>Eye Color:</b> ${dataPersonaje.eye_color} </li>
+    <li><b>Skin Color:</b> ${dataPersonaje.skin_color} </li>
     </ul>
     </div>`;
   console.log(elementoPersonaje);
@@ -1290,12 +1291,13 @@ const crearElementoNave = (dataNave) => {
   let elementoNave = document.createElement("div");
   elementoNave.classList.add("bg-white", "rounded-lg", "border", "p-4");
   elementoNave.innerHTML = `<div class="px-1 py-4">
-  <div class="font-bold text-xl mb-2">${dataNave.name}</div>
-  <ul class="text-gray-700 text-base">
-  <li><b>Model:</b> ${dataNave.model}</li>
-  <li><b>Cost in Credits:</b> ${dataNave.cost_in_credits} cm</li>
-  <li><b>Length:</b> ${dataNave.length}</li>
-  <li><b>Passengers:</b> ${dataNave.passengers} </li>
+    <div class="font-bold text-xl mb-2">${dataNave.name}</div>
+    <ul class="text-gray-700 text-base">
+    <li><b>Model:</b> ${dataNave.model}</li>
+    <li><b>Cost in Credits:</b> ${dataNave.cost_in_credits} cm</li>
+    <li><b>Length:</b> ${dataNave.length}</li>
+    <li><b>Passengers:</b> ${dataNave.passengers} </li>
+    <li><b>Starship Class:</b> ${dataNave.starship_class} </li>
     </ul>
     </div>`;
   console.log(elementoNave);
@@ -1306,13 +1308,13 @@ const crearElementoPlaneta = (dataPlaneta) => {
   let elementoPlaneta = document.createElement("div");
   elementoPlaneta.classList.add("bg-white", "rounded-lg", "border", "p-4");
   elementoPlaneta.innerHTML = `<div class="px-1 py-4">
-  <div class="font-bold text-xl mb-2">${dataPlaneta.name}</div>
-  <ul class="text-gray-700 text-base">
-  <li><b>Rotation Period:</b> ${dataPlaneta.rotation_period}</li>
-  <li><b>Diameter:</b> ${dataPlaneta.diameter} cm</li>
-  <li><b>Climate:</b> ${dataPlaneta.climate}</li>
-  <li><b>Gravity:</b> ${dataPlaneta.gravity} </li>
-  <li><b>Terrain:</b> ${dataPlaneta.terrain} </li>
+    <div class="font-bold text-xl mb-2">${dataPlaneta.name}</div>
+    <ul class="text-gray-700 text-base">
+    <li><b>Rotation Period:</b> ${dataPlaneta.rotation_period}</li>
+    <li><b>Diameter:</b> ${dataPlaneta.diameter} cm</li>
+    <li><b>Climate:</b> ${dataPlaneta.climate}</li>
+    <li><b>Gravity:</b> ${dataPlaneta.gravity} </li>
+    <li><b>Terrain:</b> ${dataPlaneta.terrain} </li>
     </ul>
     </div>`;
   console.log(elementoPlaneta);
@@ -1323,12 +1325,12 @@ const crearElementoEspecies = (dataEspecies) => {
   let elementoEspecies = document.createElement("div");
   elementoEspecies.classList.add("bg-white", "rounded-lg", "border", "p-4");
   elementoEspecies.innerHTML = `<div class="px-1 py-4">
-  <div class="font-bold text-xl mb-2">${dataEspecies.name}</div>
-  <ul class="text-gray-700 text-base">
-  <li><b>Classification Period:</b> ${dataEspecies.classification}</li>
-  <li><b>Language:</b> ${dataEspecies.language}</li>
-  <li><b>Average Lifespan:</b> ${dataEspecies.average_lifespan}</li>
-  <li><b>Average Height:</b> ${dataEspecies.average_height} </li>
+    <div class="font-bold text-xl mb-2">${dataEspecies.name}</div>
+    <ul class="text-gray-700 text-base">
+    <li><b>Classification Period:</b> ${dataEspecies.classification}</li>
+    <li><b>Language:</b> ${dataEspecies.language}</li>
+    <li><b>Average Lifespan:</b> ${dataEspecies.average_lifespan}</li>
+    <li><b>Average Height:</b> ${dataEspecies.average_height} </li>
     </ul>
     </div>`;
   console.log(elementoEspecies);
@@ -1358,19 +1360,19 @@ const butMenuCerrar = document.getElementById("butMenuCerrar")
 
 const menuAside = document.getElementById("menuAside")
 
-butMenu.addEventListener("click", ()=>{
+butMenu.addEventListener("click", () => {
   menuAside.classList.toggle("-translate-x-80")
 })
 
-butMenuCerrar.addEventListener("click", ()=>{
+butMenuCerrar.addEventListener("click", () => {
   menuAside.classList.toggle("-translate-x-80")
 })
 
-window.addEventListener("resize", ()=>{
+window.addEventListener("resize", () => {
   windowWidth = window.innerWidth
   console.log(windowWidth)
-  if (windowWidth >= 1280){
-  menuAside.classList.toggle("-translate-x-80", true)
+  if (windowWidth >= 1280) {
+    menuAside.classList.toggle("-translate-x-80", true)
   }
 })
 
@@ -1383,27 +1385,33 @@ const filtroOjos = document.getElementById("Ojos")
 const filtroHairColor = document.getElementById("Hair_Color")
 const filtroSkinColor = document.getElementById("Skin_Color")
 
-filtroGender.addEventListener("change", ()=>{ejecutarPeticiónPersonajesGenero(filtroGender.value)})
-filtroGender.addEventListener("change", ()=>{
+filtroGender.addEventListener("change", () => { ejecutarPeticiónPersonajesGenero(filtroGender.value) })
+filtroGender.addEventListener("change", () => {
+  pagina = 1
   filtroOjos.selectedIndex = 0;
   filtroHairColor.selectedIndex = 0;
   filtroSkinColor.selectedIndex = 0;
-})
-filtroOjos.addEventListener("change", ()=>{ejecutarPeticiónPersonajesEyeColor(filtroOjos.value)})
-filtroOjos.addEventListener("change", ()=>{
+});
+filtroOjos.addEventListener("change", () => { ejecutarPeticiónPersonajesEyeColor(filtroOjos.value) })
+filtroOjos.addEventListener("change", () => {
+  pagina = 1
   filtroGender.selectedIndex = 0;
   filtroHairColor.selectedIndex = 0;
   filtroSkinColor.selectedIndex = 0;
-})
-filtroHairColor.addEventListener("change", ()=>{ejecutarPeticiónPersonajesHairColor(filtroHairColor.value)})
-filtroHairColor.addEventListener("change", ()=>{
+});
+filtroHairColor.addEventListener("change", () => { ejecutarPeticiónPersonajesHairColor(filtroHairColor.value) })
+filtroHairColor.addEventListener("change", () => {
+  pagina = 1
   filtroOjos.selectedIndex = 0;
   filtroGender.selectedIndex = 0;
   filtroSkinColor.selectedIndex = 0;
-})
-filtroSkinColor.addEventListener("change", ()=>{ejecutarPeticiónPersonajesSkinColor(filtroSkinColor.value)})
-filtroSkinColor.addEventListener("change", ()=>{
+});
+filtroSkinColor.addEventListener("change", () => { ejecutarPeticiónPersonajesSkinColor(filtroSkinColor.value) })
+filtroSkinColor.addEventListener("change", () => {
+  pagina = 1
   filtroOjos.selectedIndex = 0;
   filtroHairColor.selectedIndex = 0;
   filtroGender.selectedIndex = 0;
-})
+});
+
+  //Starships
