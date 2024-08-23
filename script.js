@@ -2,31 +2,35 @@
 
 const butPersonajes = document.getElementById("butPersonajes");
 
-butPersonajes.addEventListener("click", ejecutarPeticiónPersonajes);
 butPersonajes.addEventListener("click", () => {
   pagina = 1;
+  intanciarFiltrosCharacters()
 });
+butPersonajes.addEventListener("click", ejecutarPeticiónPersonajes);
 
 const butNaves = document.getElementById("butNaves");
 
-butNaves.addEventListener("click", ejecutarPeticiónNaves);
 butNaves.addEventListener("click", () => {
   pagina = 1;
+  intanciarFiltrosStarships()
 });
+butNaves.addEventListener("click", ejecutarPeticiónNaves);
 
 const butPlanetas = document.getElementById("butPlanetas");
 
-butPlanetas.addEventListener("click", ejecutarPeticiónPlanetas);
 butPlanetas.addEventListener("click", () => {
   pagina = 1;
+  intanciarFiltrosPlanets()
 });
+butPlanetas.addEventListener("click", ejecutarPeticiónPlanetas);
 
 const butEspecies = document.getElementById("butEspecies");
 
-butEspecies.addEventListener("click", ejecutarPeticiónSpecies);
 butEspecies.addEventListener("click", () => {
   pagina = 1;
+  intanciarFiltrosEspecies()
 });
+butEspecies.addEventListener("click", ejecutarPeticiónSpecies);
 
 //Headers
 
@@ -75,7 +79,7 @@ const crearBotones = (section, maxPag, argg) => {
   but1.innerHTML = `<div class="px-1 py-4">
     <div class="font-bold text-xl mb-2">Anterior</div>
     <button id="butAnterior" class="text-gray-700 text-base">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-32 h-32 text-blue-500">
     <path fill-rule="evenodd" d="M7.28 7.72a.75.75 0 0 1 0 1.06l-2.47 2.47H21a.75.75 0 0 1 0 1.5H4.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
     </svg>
     </button>
@@ -83,7 +87,7 @@ const crearBotones = (section, maxPag, argg) => {
   but2 = document.createElement("div");
   but2.innerHTML = `<div class="px-1 py-4">
     <div class="font-bold text-xl mb-2">Siguiente</div>
-    <button id="butSiguiente" class="text-gray-700 text-base"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+    <button id="butSiguiente" class="text-gray-700 text-base"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-32 h-32 text-blue-500">
     <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
     </svg>
     </button>
@@ -1378,197 +1382,451 @@ window.addEventListener("resize", () => {
 
 // Filtros Enlace con Botones
 
+const filtrosContenedor = document.getElementById("filtros")
+
 //Characters
 
-/* const filtroGender = document.getElementById("Gender")
-const filtroOjos = document.getElementById("Ojos")
-const filtroHairColor = document.getElementById("Hair_Color")
-const filtroSkinColor = document.getElementById("Skin_Color")
+const intanciarFiltrosCharacters = ()=>{
+    filtrosContenedor.innerHTML = `<section>
+    <label
+    class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+    disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+    flex items-center gap-4 px-4 capitalize"
+    for="Ojos">Gender: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Gender" name="Gender">
+      <option value="" selected disabled>Select a Gender...</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="hermaphrodite">Hermaphrodite</option>
+    </select></label>
+  </section>
+  <section>
+    <label
+    class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+    disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+    flex items-center gap-4 px-4 capitalize"
+    for="Ojos">Eye Color: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Ojos" name="Ojos">
+      <option value="" selected disabled>Select a Eye Color...</option>
+      <option value="blue">Blue</option>
+      <option value="red">Red</option>
+      <option value="green">Green</option>
+      <option value="yellow">Yellow</option>
+      <option value="black">Black</option>
+      <option value="white">White</option>
+      <option value="brown">Brown</option>
+    </select></label>
+  </section>
+  <section>
+    <label
+    class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+    disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+    flex items-center gap-4 px-4 capitalize"
+    for="Hair_Color">Hair Color: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Hair_Color" name="Hair_Color">
+        <option value="" selected disabled>Select a Hair Color...</option>
+        <option value="blond">Blond</option>
+        <option value="brown">Brown</option>
+        <option value="grey">Grey</option>
+        <option value="black">Black</option>
+        <option value="auburn">Auburn</option>
+        <option value="white">White</option>
+      </select></label>
+    </section>
+    <section>
+      <label
+      class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+      disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+      flex items-center gap-4 px-4 capitalize"
+      for="Skin_Color">Skin Color: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-smz" id="Skin_Color" name="Skin_Color">
+        <option value="" selected disabled>Select a Skin Color...</option>
+        <option value="fair">Fair</option>
+        <option value="gold">Gold</option>
+        <option value="white">White</option>
+        <option value="blue">Blue</option>
+        <option value="light">Light</option>
+        <option value="red">Red</option>
+      </select></label>
+    </section>`
+  const filtroGender = document.getElementById("Gender")
+  const filtroOjos = document.getElementById("Ojos")
+  const filtroHairColor = document.getElementById("Hair_Color")
+  const filtroSkinColor = document.getElementById("Skin_Color")
+  
+  filtroGender.addEventListener("change", () => { ejecutarPeticiónPersonajesGenero(filtroGender.value) })
+  filtroGender.addEventListener("change", () => {
+    pagina = 1
+    filtroOjos.selectedIndex = 0;
+    filtroHairColor.selectedIndex = 0;
+    filtroSkinColor.selectedIndex = 0;
+  });
+  filtroOjos.addEventListener("change", () => { ejecutarPeticiónPersonajesEyeColor(filtroOjos.value) })
+  filtroOjos.addEventListener("change", () => {
+    pagina = 1
+    filtroGender.selectedIndex = 0;
+    filtroHairColor.selectedIndex = 0;
+    filtroSkinColor.selectedIndex = 0;
+  });
+  filtroHairColor.addEventListener("change", () => { ejecutarPeticiónPersonajesHairColor(filtroHairColor.value) })
+  filtroHairColor.addEventListener("change", () => {
+    pagina = 1
+    filtroOjos.selectedIndex = 0;
+    filtroGender.selectedIndex = 0;
+    filtroSkinColor.selectedIndex = 0;
+  });
+  filtroSkinColor.addEventListener("change", () => { ejecutarPeticiónPersonajesSkinColor(filtroSkinColor.value) })
+  filtroSkinColor.addEventListener("change", () => {
+    pagina = 1
+    filtroOjos.selectedIndex = 0;
+    filtroHairColor.selectedIndex = 0;
+    filtroGender.selectedIndex = 0;
+  });
+}
 
-filtroGender.addEventListener("change", () => { ejecutarPeticiónPersonajesGenero(filtroGender.value) })
-filtroGender.addEventListener("change", () => {
-  pagina = 1
-  filtroOjos.selectedIndex = 0;
-  filtroHairColor.selectedIndex = 0;
-  filtroSkinColor.selectedIndex = 0;
-});
-filtroOjos.addEventListener("change", () => { ejecutarPeticiónPersonajesEyeColor(filtroOjos.value) })
-filtroOjos.addEventListener("change", () => {
-  pagina = 1
-  filtroGender.selectedIndex = 0;
-  filtroHairColor.selectedIndex = 0;
-  filtroSkinColor.selectedIndex = 0;
-});
-filtroHairColor.addEventListener("change", () => { ejecutarPeticiónPersonajesHairColor(filtroHairColor.value) })
-filtroHairColor.addEventListener("change", () => {
-  pagina = 1
-  filtroOjos.selectedIndex = 0;
-  filtroGender.selectedIndex = 0;
-  filtroSkinColor.selectedIndex = 0;
-});
-filtroSkinColor.addEventListener("change", () => { ejecutarPeticiónPersonajesSkinColor(filtroSkinColor.value) })
-filtroSkinColor.addEventListener("change", () => {
-  pagina = 1
-  filtroOjos.selectedIndex = 0;
-  filtroHairColor.selectedIndex = 0;
-  filtroGender.selectedIndex = 0;
-}); */
 
 //Starships
 
-/* const Starship_Class = document.getElementById("Starship_Class")
-const Cost_in_Credits = document.getElementById("Cost_in_Credits")
-const Cost_in_Credits_Max = document.getElementById("Cost_in_Credits_Max")
-const Min_Passenger = document.getElementById("Min_Passenger")
-const Max_Passenger = document.getElementById("Max_Passenger")
-const Min_Cargo_Capacity = document.getElementById("Min_Cargo_Capacity")
-const Max_Cargo_Capacity = document.getElementById("Max_Cargo_Capacity")
+const intanciarFiltrosStarships = ()=>{
+filtrosContenedor.innerHTML = `<section>
+<label
+class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+flex items-center gap-4 px-4 capitalize"
+for="Starship_Class">Starship_Class: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Starship_Class" name="Starship_Class">
+  <option value="" selected disabled>Select a Starship Class...</option>
+  <option value="corvette">Corvette</option>
+  <option value="Star Destroyer">Star Destroyer</option>
+  <option value="Light freighter">Light freighter</option>
+  <option value="Medium transport">Medium transport</option>
+  <option value="Star dreadnought">Star dreadnought</option>
+  <option value="Starfighter">Starfighter</option>
+</select></label>
+</section>
+<section>
+<label
+class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+flex items-center gap-4 px-4 capitalize"
+for="Cost_in_Credits">Min Cost in Credits:
+  <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Cost_in_Credits" id="Cost_in_Credits" min="0" max="150000000"></label>
+</section>
+<section>
+<label
+class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+flex items-center gap-4 px-4 capitalize"
+for="Cost_in_Credits_Max">Max Cost in Credits:
+  <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Cost_in_Credits_Max" id="Cost_in_Credits_Max" min="35700" max="150000000"></label>
+</section>
+<section>
+<label
+class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+flex items-center gap-4 px-4 capitalize"
+for="Min_Passenger">Min Passengers:
+  <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Passenger" id="Min_Passenger" min="0" max="139000"></label>
+</section>
+<section>
+<label
+class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+flex items-center gap-4 px-4 capitalize"
+for="Max_Passenger">Max Passengers:
+  <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Passenger" id="Max_Passenger" min="0" max="139000"></label>
+</section>
+<section>
+<label
+class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+flex items-center gap-4 px-4 capitalize"
+for="Min_Cargo_Capacity">Min Cargo Capacity:
+  <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Cargo_Capacity" id="Min_Cargo_Capacity" min="100" max="36000000"></label>
+</section>
+<section>
+<label
+class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+flex items-center gap-4 px-4 capitalize"
+for="Max_Cargo_Capacity">Max Cargo Capacity:
+  <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Cargo_Capacity" id="Max_Cargo_Capacity" min="100" max="36000000"></label>
+</section>`
+  const Starship_Class = document.getElementById("Starship_Class")
+  const Cost_in_Credits = document.getElementById("Cost_in_Credits")
+  const Cost_in_Credits_Max = document.getElementById("Cost_in_Credits_Max")
+  const Min_Passenger = document.getElementById("Min_Passenger")
+  const Max_Passenger = document.getElementById("Max_Passenger")
+  const Min_Cargo_Capacity = document.getElementById("Min_Cargo_Capacity")
+  const Max_Cargo_Capacity = document.getElementById("Max_Cargo_Capacity")
+  
+  Starship_Class.addEventListener("change", () => {
+    pagina = 1
+    ejecutarPeticiónNavesClase(Starship_Class.value);
+    Cost_in_Credits.value = 0;
+    Cost_in_Credits_Max.value = 0;
+    Min_Passenger.value = 0;
+    Max_Passenger.value = 0;
+    Min_Cargo_Capacity.value = 0;
+    Max_Cargo_Capacity.value = 0;
+  })
+  Cost_in_Credits.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticiónNavesCostMayor(Number(Cost_in_Credits.value));
+    Starship_Class.selectedIndex = 0;
+    Cost_in_Credits_Max.value = 0;
+    Min_Passenger.value = 0;
+    Max_Passenger.value = 0;
+    Min_Cargo_Capacity.value = 0;
+    Max_Cargo_Capacity.value = 0;
+  })
+  Cost_in_Credits_Max.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticiónNavesCostMenor(Number(Cost_in_Credits_Max.value));
+    Starship_Class.selectedIndex = 0;
+    Cost_in_Credits.value = 0;
+    Min_Passenger.value = 0;
+    Max_Passenger.value = 0;
+    Min_Cargo_Capacity.value = 0;
+    Max_Cargo_Capacity.value = 0;
+  })
+  Min_Passenger.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticiónNavesPasajerosMayor(Number(Min_Passenger.value));
+    Starship_Class.selectedIndex = 0;
+    Cost_in_Credits.value = 0
+    Cost_in_Credits_Max.value = 0
+    Max_Passenger.value = 0
+    Min_Cargo_Capacity.value = 0
+    Max_Cargo_Capacity.value = 0
+  })
+  Max_Passenger.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticiónNavesPasajerosMenor(Number(Max_Passenger.value));
+    Starship_Class.selectedIndex = 0;
+    Cost_in_Credits.value = 0
+    Cost_in_Credits_Max.value = 0
+    Min_Passenger.value = 0
+    Min_Cargo_Capacity.value = 0
+    Max_Cargo_Capacity.value = 0
+  })
+  Min_Cargo_Capacity.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticiónNavesCapacidadCargaMayor(Number(Min_Cargo_Capacity.value));
+    Starship_Class.selectedIndex = 0;
+    Cost_in_Credits.value = 0
+    Cost_in_Credits_Max.value = 0
+    Min_Passenger.value = 0
+    Max_Passenger.value = 0
+    Max_Cargo_Capacity.value = 0
+  })
+  Max_Cargo_Capacity.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticiónNavesCapacidadCargaMenor(Number(Max_Cargo_Capacity.value));
+    Starship_Class.selectedIndex = 0;
+    Cost_in_Credits.value = 0
+    Cost_in_Credits_Max.value = 0
+    Min_Passenger.value = 0
+    Max_Passenger.value = 0
+    Min_Cargo_Capacity.value = 0
+  })
+}
 
-Starship_Class.addEventListener("change", () => {
-  pagina = 1
-  ejecutarPeticiónNavesClase(Starship_Class.value);
-  Cost_in_Credits.value = 0;
-  Cost_in_Credits_Max.value = 0;
-  Min_Passenger.value = 0;
-  Max_Passenger.value = 0;
-  Min_Cargo_Capacity.value = 0;
-  Max_Cargo_Capacity.value = 0;
-})
-Cost_in_Credits.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticiónNavesCostMayor(Number(Cost_in_Credits.value));
-  Starship_Class.selectedIndex = 0;
-  Cost_in_Credits_Max.value = 0;
-  Min_Passenger.value = 0;
-  Max_Passenger.value = 0;
-  Min_Cargo_Capacity.value = 0;
-  Max_Cargo_Capacity.value = 0;
-})
-Cost_in_Credits_Max.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticiónNavesCostMenor(Number(Cost_in_Credits_Max.value));
-  Starship_Class.selectedIndex = 0;
-  Cost_in_Credits.value = 0;
-  Min_Passenger.value = 0;
-  Max_Passenger.value = 0;
-  Min_Cargo_Capacity.value = 0;
-  Max_Cargo_Capacity.value = 0;
-})
-Min_Passenger.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticiónNavesPasajerosMayor(Number(Min_Passenger.value));
-  Starship_Class.selectedIndex = 0;
-  Cost_in_Credits.value = 0
-  Cost_in_Credits_Max.value = 0
-  Max_Passenger.value = 0
-  Min_Cargo_Capacity.value = 0
-  Max_Cargo_Capacity.value = 0
-})
-Max_Passenger.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticiónNavesPasajerosMenor(Number(Max_Passenger.value));
-  Starship_Class.selectedIndex = 0;
-  Cost_in_Credits.value = 0
-  Cost_in_Credits_Max.value = 0
-  Min_Passenger.value = 0
-  Min_Cargo_Capacity.value = 0
-  Max_Cargo_Capacity.value = 0
-})
-Min_Cargo_Capacity.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticiónNavesCapacidadCargaMayor(Number(Min_Cargo_Capacity.value));
-  Starship_Class.selectedIndex = 0;
-  Cost_in_Credits.value = 0
-  Cost_in_Credits_Max.value = 0
-  Min_Passenger.value = 0
-  Max_Passenger.value = 0
-  Max_Cargo_Capacity.value = 0
-})
-Max_Cargo_Capacity.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticiónNavesCapacidadCargaMenor(Number(Max_Cargo_Capacity.value));
-  Starship_Class.selectedIndex = 0;
-  Cost_in_Credits.value = 0
-  Cost_in_Credits_Max.value = 0
-  Min_Passenger.value = 0
-  Max_Passenger.value = 0
-  Min_Cargo_Capacity.value = 0
-}) */
 
 // Planets
 
-/* const Climate = document.getElementById("Climate")
-const Terrain = document.getElementById("Terrain")
-const Min_Poblacion = document.getElementById("Min_Poblacion")
-const Max_Poblacion = document.getElementById("Max_Poblacion")
-const Min_Diametro = document.getElementById("Min_Diametro")
-const Max_Diametro = document.getElementById("Max_Diametro")
-
-Climate.addEventListener("change", () => {
-  pagina = 1
-  ejecutarPeticionPlanetasClima(Climate.value);
-})
-
-Terrain.addEventListener("change", () => {
-  pagina = 1
-  ejecutarPeticionPlanetasTerreno(Terrain.value);
-})
-
-Min_Poblacion.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticionPlanetasPoblacionMayor(Number(Min_Poblacion.value));
-})
-
-Max_Poblacion.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticionPlanetasPoblacionMenor(Number(Max_Poblacion.value));
-})
-
-Min_Diametro.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticionPlanetasDiametroMayor(Number(Min_Diametro.value));
-})
-
-Max_Diametro.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticionPlanetasDiametroMenor(Number(Max_Diametro.value));
-}) */
+const intanciarFiltrosPlanets = ()=>{
+  filtrosContenedor.innerHTML = `<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Climate">Climate: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Climate" name="Climate">
+    <option value="" selected disabled>Select a Climate...</option>
+    <option value="arid">Arid</option>
+    <option value="temperate">Temperate</option>
+    <option value="murky">Murky</option>
+    <option value="frozen">Frozen</option>
+    <option value="tropical">Tropical</option>
+  </select></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Terrain">Terrain: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Terrain" name="Terrain">
+    <option value="" selected disabled>Select a Terrain...</option>
+    <option value="jungle">Jungle</option>
+    <option value="lava">Lava</option>
+    <option value="mountains">Mountains</option>
+    <option value="rivers">Rivers</option>
+    <option value="lakes">Lakes</option>
+  </select></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Min_Poblacion">Min Population:
+    <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Poblacion" id="Min_Poblacion" min="1000" max="150000000"></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Max_Poblacion">Max Population:
+    <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Poblacion" id="Max_Poblacion" min="35700" max="150000000"></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Min_Diametro">Min Diameter:
+    <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Diametro" id="Min_Diametro" min="0" max="118000"></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Max_Diametro">Max Diameter:
+    <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Diametro" id="Max_Diametro" min="0" max="118000"></label>
+</section>`
+  const Climate = document.getElementById("Climate")
+  const Terrain = document.getElementById("Terrain")
+  const Min_Poblacion = document.getElementById("Min_Poblacion")
+  const Max_Poblacion = document.getElementById("Max_Poblacion")
+  const Min_Diametro = document.getElementById("Min_Diametro")
+  const Max_Diametro = document.getElementById("Max_Diametro")
+  
+  Climate.addEventListener("change", () => {
+    pagina = 1
+    ejecutarPeticionPlanetasClima(Climate.value);
+  })
+  
+  Terrain.addEventListener("change", () => {
+    pagina = 1
+    ejecutarPeticionPlanetasTerreno(Terrain.value);
+  })
+  
+  Min_Poblacion.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticionPlanetasPoblacionMayor(Number(Min_Poblacion.value));
+  })
+  
+  Max_Poblacion.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticionPlanetasPoblacionMenor(Number(Max_Poblacion.value));
+  })
+  
+  Min_Diametro.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticionPlanetasDiametroMayor(Number(Min_Diametro.value));
+  })
+  
+  Max_Diametro.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticionPlanetasDiametroMenor(Number(Max_Diametro.value));
+  })
+}
 
 // Especies
 
-/* const Classification = document.getElementById("Classification")
-const Language = document.getElementById("Language")
-const Min_Average_Lifespan = document.getElementById("Min_Average_Lifespan")
-const Max_Average_Lifespan = document.getElementById("Max_Average_Lifespan")
-const Min_Height = document.getElementById("Min_Height")
-const Max_Height = document.getElementById("Max_Height")
+const intanciarFiltrosEspecies = ()=>{
+  filtrosContenedor.innerHTML = `<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Classification">Classification: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Classification" name="Classification">
+    <option value="" selected disabled>Select a Classification...</option>
+    <option value="mammal">Mammal</option>
+    <option value="artificial">Artificial</option>
+    <option value="sentient">Sentient</option>
+    <option value="reptile">Reptile</option>
+    <option value="amphibian">Amphibian</option>
+  </select></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Language">Language: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Language" name="Language">
+    <option value="" selected disabled>Select a Language...</option>
+    <option value="Galactic">Galactic</option>
+    <option value="Huttese">Huttese</option>
+    <option value="Ewokese">Ewokese</option>
+    <option value="Dosh">Dosh</option>
+    <option value="Sullutese">Sullutese</option>
+  </select></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Min_Average_Lifespan">Min Average Lifespan:
+    <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Average_Lifespan" id="Min_Average_Lifespan" min="75" max="1000"></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Max_Average_Lifespan">Max Average Lifespan:
+    <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Average_Lifespan" id="Max_Average_Lifespan" min="75" max="1000"></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Min_Height">Min Height:
+    <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Height" id="Min_Height" min="66" max="300"></label>
+</section>
+<section>
+  <label
+  class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+  disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+  flex items-center gap-4 px-4 capitalize"
+  for="Max_Height">Max Height:
+    <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Height" id="Max_Height" min="66" max="300"></label>
+</section>`
+  const Classification = document.getElementById("Classification")
+  const Language = document.getElementById("Language")
+  const Min_Average_Lifespan = document.getElementById("Min_Average_Lifespan")
+  const Max_Average_Lifespan = document.getElementById("Max_Average_Lifespan")
+  const Min_Height = document.getElementById("Min_Height")
+  const Max_Height = document.getElementById("Max_Height")
+  
+  Classification.addEventListener("change", () => {
+    pagina = 1
+    ejecutarPeticionEspeciesClasificacion(Classification.value);
+  })
+  
+  Language.addEventListener("change", () => {
+    pagina = 1
+    ejecutarPeticionEspeciesLenguaje(Language.value);
+  })
+  
+  Min_Average_Lifespan.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticionEspeciesEdadMayor(Number(Min_Average_Lifespan.value));
+  })
+  
+  Max_Average_Lifespan.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticionEspeciesEdadMenor(Number(Max_Average_Lifespan.value));
+  })
+  
+  Min_Height.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticionEspeciesAlturaMayor(Number(Min_Height.value));
+  })
+  
+  Max_Height.addEventListener("input", () => {
+    pagina = 1
+    ejecutarPeticionEspeciesAlturaMenor(Number(Max_Height.value));
+  })
+}
 
-Classification.addEventListener("change", () => {
-  pagina = 1
-  ejecutarPeticionEspeciesClasificacion(Classification.value);
-})
-
-Language.addEventListener("change", () => {
-  pagina = 1
-  ejecutarPeticionEspeciesLenguaje(Language.value);
-})
-
-Min_Average_Lifespan.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticionEspeciesEdadMayor(Number(Min_Average_Lifespan.value));
-})
-
-Max_Average_Lifespan.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticionEspeciesEdadMenor(Number(Max_Average_Lifespan.value));
-})
-
-Min_Height.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticionEspeciesAlturaMayor(Number(Min_Height.value));
-})
-
-Max_Height.addEventListener("input", () => {
-  pagina = 1
-  ejecutarPeticionEspeciesAlturaMenor(Number(Max_Height.value));
-}) */
