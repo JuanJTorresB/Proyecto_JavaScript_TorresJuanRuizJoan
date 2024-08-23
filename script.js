@@ -128,7 +128,7 @@ async function crearListaPersonajesGenero(genero) {
     );
     
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.gender===genero){
+      if (personaje.gender.includes(genero)){
         personajesFiltrados.push(personaje);
       }
     }
@@ -139,7 +139,9 @@ async function crearListaPersonajesGenero(genero) {
   for (let j=0; j<=personajesFiltrados.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(personajesFiltrados[j]);
+      if(personajesFiltrados[j]!==undefined){
+        listaAgregar.push(personajesFiltrados[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -160,7 +162,7 @@ async function crearListaPersonajesEyeColor(color) {
     );
     
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.eye_color===color){
+      if (personaje.eye_color.includes(color)){
         personajesFiltrados.push(personaje);
       }
     }
@@ -171,7 +173,9 @@ async function crearListaPersonajesEyeColor(color) {
   for (let j=0; j<=personajesFiltrados.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(personajesFiltrados[j]);
+      if(personajesFiltrados[j]!==undefined){
+        listaAgregar.push(personajesFiltrados[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -192,7 +196,7 @@ async function crearListaPersonajesHairColor(color) {
     );
     
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.hair_color===color){
+      if (personaje.hair_color.includes(color)){
         personajesFiltrados.push(personaje);
       }
     }
@@ -203,7 +207,9 @@ async function crearListaPersonajesHairColor(color) {
   for (let j=0; j<=personajesFiltrados.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(personajesFiltrados[j]);
+      if(personajesFiltrados[j]!==undefined){
+        listaAgregar.push(personajesFiltrados[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -224,7 +230,7 @@ async function crearListaPersonajesSkinColor(color) {
     );
     
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.skin_color===color){
+      if (personaje.skin_color.includes(color)){
         personajesFiltrados.push(personaje);
       }
     }
@@ -235,7 +241,10 @@ async function crearListaPersonajesSkinColor(color) {
   for (let j=0; j<=personajesFiltrados.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(personajesFiltrados[j]);
+      if(personajesFiltrados[j]!==undefined){
+        listaAgregar.push(personajesFiltrados[j]);
+      }
+      
       if(i!==8){
         j+=1;
       }
@@ -267,7 +276,9 @@ async function crearListaNavesClase(clase) {
   for (let j=0; j<=navesFiltradas.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(navesFiltradas[j]);
+      if(navesFiltradas[j]!==undefined){
+        listaAgregar.push(navesFiltradas[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -299,7 +310,9 @@ async function crearListaNavesCostMayor(costo) {
   for (let j=0; j<=navesFiltradas.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(navesFiltradas[j]);
+      if(navesFiltradas[j]!==undefined){
+        listaAgregar.push(navesFiltradas[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -331,7 +344,9 @@ async function crearListaNavesCostMenor(costo) {
   for (let j=0; j<=navesFiltradas.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(navesFiltradas[j]);
+      if(navesFiltradas[j]!==undefined){
+        listaAgregar.push(navesFiltradas[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -363,7 +378,9 @@ async function crearListaNavesPasajerosMayor(pasajeros) {
   for (let j=0; j<=navesFiltradas.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(navesFiltradas[j]);
+      if(navesFiltradas[j]!==undefined){
+        listaAgregar.push(navesFiltradas[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -395,7 +412,9 @@ async function crearListaNavesPasajerosMenor(pasajeros) {
   for (let j=0; j<=navesFiltradas.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(navesFiltradas[j]);
+      if(navesFiltradas[j]!==undefined){
+        listaAgregar.push(navesFiltradas[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -427,7 +446,9 @@ async function crearListaNavesCapacidadCargaMayor(carga) {
   for (let j=0; j<=navesFiltradas.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(navesFiltradas[j]);
+      if(navesFiltradas[j]!==undefined){
+        listaAgregar.push(navesFiltradas[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -459,7 +480,215 @@ async function crearListaNavesCapacidadCargaMenor(carga) {
   for (let j=0; j<=navesFiltradas.length;j++){
     let listaAgregar = [];
     for(let i=0;i<=9;i++){
-      listaAgregar.push(navesFiltradas[j]);
+      if(navesFiltradas[j]!==undefined){
+        listaAgregar.push(navesFiltradas[j]);
+      }
+      
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaPlanetasClima(clima) {
+  let planetasFiltrados = [];
+  for (let i=0; i<5; i++){
+    const resultadoObtenido = await petición(
+      `${url}/planets/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let planeta of resultadoObtenido.results) {
+      if (planeta.climate.includes(clima)){
+        planetasFiltrados.push(planeta);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=planetasFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(planetasFiltrados[j]!==undefined){
+        listaAgregar.push(planetasFiltrados[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaPlanetasTerreno(terreno) {
+  let planetasFiltrados = [];
+  for (let i=0; i<5; i++){
+    const resultadoObtenido = await petición(
+      `${url}/planets/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let planeta of resultadoObtenido.results) {
+      if (planeta.terrain.includes(terreno)){
+        planetasFiltrados.push(planeta);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=planetasFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(planetasFiltrados[j]!==undefined){
+        listaAgregar.push(planetasFiltrados[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaPlanetasPoblacionMayor(poblacion) {
+  let planetasFiltrados = [];
+  for (let i=0; i<5; i++){
+    const resultadoObtenido = await petición(
+      `${url}/planets/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let planeta of resultadoObtenido.results) {
+      if (planeta.population>=poblacion && planeta.population!=="unknown"){
+        planetasFiltrados.push(planeta);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=planetasFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(planetasFiltrados[j]!==undefined){
+        listaAgregar.push(planetasFiltrados[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaPlanetasPoblacionMenor(poblacion) {
+  let planetasFiltrados = [];
+  for (let i=0; i<5; i++){
+    const resultadoObtenido = await petición(
+      `${url}/planets/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let planeta of resultadoObtenido.results) {
+      if (planeta.population<=poblacion && planeta.population!=="unknown"){
+        planetasFiltrados.push(planeta);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=planetasFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(planetasFiltrados[j]!==undefined){
+        listaAgregar.push(planetasFiltrados[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+
+async function crearListaPlanetasDiametroMayor(diametro) {
+  let planetasFiltrados = [];
+  for (let i=0; i<5; i++){
+    const resultadoObtenido = await petición(
+      `${url}/planets/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let planeta of resultadoObtenido.results) {
+      if (planeta.diameter>=diametro){
+        planetasFiltrados.push(planeta);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=planetasFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(planetasFiltrados[j]!==undefined){
+        listaAgregar.push(planetasFiltrados[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaPlanetasDiametroMenor(diametro) {
+  let planetasFiltrados = [];
+  for (let i=0; i<5; i++){
+    const resultadoObtenido = await petición(
+      `${url}/planets/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let planeta of resultadoObtenido.results) {
+      if (planeta.diameter<=diametro){
+        planetasFiltrados.push(planeta);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=planetasFiltrados.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(planetasFiltrados[j]!==undefined){
+        listaAgregar.push(planetasFiltrados[j]);
+      }
       if(i!==8){
         j+=1;
       }
@@ -662,6 +891,84 @@ async function ejecutarPeticiónPlanetas() {
   }
 }
 
+async function ejecutarPeticionPlanetasClima(clima) {
+  activarBotónEstilos(butPlanetas);
+  let planetasFiltrados = await crearListaPlanetasClima(clima);
+  console.log(planetasFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionPlanetasClima, planetasFiltrados.length-1);
+
+  for(planeta of planetasFiltrados[pagina-1]){
+    let planetaCard = crearElementoPlaneta(planeta);
+    containerPersonajes.appendChild(planetaCard);
+  }
+}
+
+async function ejecutarPeticionPlanetasTerreno(terreno) {
+  activarBotónEstilos(butPlanetas);
+  let planetasFiltrados = await crearListaPlanetasTerreno(terreno);
+  console.log(planetasFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionPlanetasTerreno, planetasFiltrados.length-1);
+
+  for(planeta of planetasFiltrados[pagina-1]){
+    let planetaCard = crearElementoPlaneta(planeta);
+    containerPersonajes.appendChild(planetaCard);
+  }
+}
+
+async function ejecutarPeticionPlanetasPoblacionMayor(poblacion) {
+  activarBotónEstilos(butPlanetas);
+  let planetasFiltrados = await crearListaPlanetasPoblacionMayor(poblacion);
+  console.log(planetasFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionPlanetasPoblacionMayor, planetasFiltrados.length-1);
+
+  for(planeta of planetasFiltrados[pagina-1]){
+    let planetaCard = crearElementoPlaneta(planeta);
+    containerPersonajes.appendChild(planetaCard);
+  }
+}
+
+async function ejecutarPeticionPlanetasPoblacionMenor(poblacion) {
+  activarBotónEstilos(butPlanetas);
+  let planetasFiltrados = await crearListaPlanetasPoblacionMenor(poblacion);
+  console.log(planetasFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionPlanetasPoblacionMenor, planetasFiltrados.length-1);
+
+  for(planeta of planetasFiltrados[pagina-1]){
+    let planetaCard = crearElementoPlaneta(planeta);
+    containerPersonajes.appendChild(planetaCard);
+  }
+}
+
+async function ejecutarPeticionPlanetasDiametroMayor(diametro) {
+  activarBotónEstilos(butPlanetas);
+  let planetasFiltrados = await crearListaPlanetasDiametroMayor(diametro);
+  console.log(planetasFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionPlanetasDiametroMayor, planetasFiltrados.length-1);
+
+  for(planeta of planetasFiltrados[pagina-1]){
+    let planetaCard = crearElementoPlaneta(planeta);
+    containerPersonajes.appendChild(planetaCard);
+  }
+}
+
+async function ejecutarPeticionPlanetasDiametroMenor(diametro) {
+  activarBotónEstilos(butPlanetas);
+  let planetasFiltrados = await crearListaPlanetasDiametroMenor(diametro);
+  console.log(planetasFiltrados);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionPlanetasDiametroMenor, planetasFiltrados.length-1);
+
+  for(planeta of planetasFiltrados[pagina-1]){
+    let planetaCard = crearElementoPlaneta(planeta);
+    containerPersonajes.appendChild(planetaCard);
+  }
+}
+
 async function ejecutarPeticiónSpecies() {
   activarBotónEstilos(butEspecies);
   const resultadoObtenido = await petición(
@@ -676,6 +983,7 @@ async function ejecutarPeticiónSpecies() {
     containerPersonajes.appendChild(especiesCard);
   }
 }
+
 
 //Creación de elementos
 
