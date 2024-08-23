@@ -129,7 +129,7 @@ async function crearListaPersonajesGenero(genero) {
     );
 
     for (let personaje of resultadoObtenido.results) {
-      if (personaje.gender.includes(genero)) {
+      if (personaje.gender == (genero)) {
         personajesFiltrados.push(personaje);
       }
     }
@@ -1088,7 +1088,7 @@ async function ejecutarPeticiónPlanetas(ignore) {
     opciones
   );
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónPlanetas, 7);
+  crearBotones(ejecutarPeticiónPlanetas, 7, ignore);
   console.log(resultadoObtenido.results);
   for (let planeta of resultadoObtenido.results) {
     let planetaCard = crearElementoPlaneta(planeta);
@@ -1101,7 +1101,7 @@ async function ejecutarPeticionPlanetasClima(clima) {
   let planetasFiltrados = await crearListaPlanetasClima(clima);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasClima, planetasFiltrados.length - 1);
+  crearBotones(ejecutarPeticionPlanetasClima, planetasFiltrados.length - 1, clima);
 
   for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
@@ -1114,7 +1114,7 @@ async function ejecutarPeticionPlanetasTerreno(terreno) {
   let planetasFiltrados = await crearListaPlanetasTerreno(terreno);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasTerreno, planetasFiltrados.length - 1);
+  crearBotones(ejecutarPeticionPlanetasTerreno, planetasFiltrados.length - 1, terreno);
 
   for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
@@ -1127,7 +1127,7 @@ async function ejecutarPeticionPlanetasPoblacionMayor(poblacion) {
   let planetasFiltrados = await crearListaPlanetasPoblacionMayor(poblacion);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasPoblacionMayor, planetasFiltrados.length - 1);
+  crearBotones(ejecutarPeticionPlanetasPoblacionMayor, planetasFiltrados.length - 1, poblacion);
 
   for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
@@ -1140,7 +1140,7 @@ async function ejecutarPeticionPlanetasPoblacionMenor(poblacion) {
   let planetasFiltrados = await crearListaPlanetasPoblacionMenor(poblacion);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasPoblacionMenor, planetasFiltrados.length - 1);
+  crearBotones(ejecutarPeticionPlanetasPoblacionMenor, planetasFiltrados.length - 1, poblacion);
 
   for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
@@ -1153,7 +1153,7 @@ async function ejecutarPeticionPlanetasDiametroMayor(diametro) {
   let planetasFiltrados = await crearListaPlanetasDiametroMayor(diametro);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasDiametroMayor, planetasFiltrados.length - 1);
+  crearBotones(ejecutarPeticionPlanetasDiametroMayor, planetasFiltrados.length - 1, diametro);
 
   for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
@@ -1166,7 +1166,7 @@ async function ejecutarPeticionPlanetasDiametroMenor(diametro) {
   let planetasFiltrados = await crearListaPlanetasDiametroMenor(diametro);
   console.log(planetasFiltrados);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionPlanetasDiametroMenor, planetasFiltrados.length - 1);
+  crearBotones(ejecutarPeticionPlanetasDiametroMenor, planetasFiltrados.length - 1, diametro);
 
   for (planeta of planetasFiltrados[pagina - 1]) {
     let planetaCard = crearElementoPlaneta(planeta);
@@ -1181,7 +1181,7 @@ async function ejecutarPeticiónSpecies(ignore) {
     opciones
   );
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónSpecies, 4);
+  crearBotones(ejecutarPeticiónSpecies, 4, ignore);
   console.log(resultadoObtenido.results);
   for (let especies of resultadoObtenido.results) {
     let especiesCard = crearElementoEspecies(especies);
@@ -1194,7 +1194,7 @@ async function ejecutarPeticionEspeciesClasificacion(clasificacion) {
   let especiesFiltradas = await crearListaEspeciesClasificacion(clasificacion);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesClasificacion, especiesFiltradas.length - 1);
+  crearBotones(ejecutarPeticionEspeciesClasificacion, especiesFiltradas.length - 1, clasificacion);
 
   for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
@@ -1207,7 +1207,7 @@ async function ejecutarPeticionEspeciesLenguaje(lenguaje) {
   let especiesFiltradas = await crearListaEspeciesLenguaje(lenguaje);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesLenguaje, especiesFiltradas.length - 1);
+  crearBotones(ejecutarPeticionEspeciesLenguaje, especiesFiltradas.length - 1, lenguaje);
 
   for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
@@ -1220,7 +1220,7 @@ async function ejecutarPeticionEspeciesEdadMayor(edad) {
   let especiesFiltradas = await crearListaEspeciesEdadMayor(edad);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesEdadMayor, especiesFiltradas.length - 1);
+  crearBotones(ejecutarPeticionEspeciesEdadMayor, especiesFiltradas.length - 1, edad);
 
   for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
@@ -1233,7 +1233,7 @@ async function ejecutarPeticionEspeciesEdadMenor(edad) {
   let especiesFiltradas = await crearListaEspeciesEdadMenor(edad);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesEdadMenor, especiesFiltradas.length - 1);
+  crearBotones(ejecutarPeticionEspeciesEdadMenor, especiesFiltradas.length - 1, edad);
 
   for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
@@ -1246,7 +1246,7 @@ async function ejecutarPeticionEspeciesAlturaMayor(altura) {
   let especiesFiltradas = await crearListaEspeciesAlturaMayor(altura);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesAlturaMayor, especiesFiltradas.length - 1);
+  crearBotones(ejecutarPeticionEspeciesAlturaMayor, especiesFiltradas.length - 1, altura);
 
   for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
@@ -1259,7 +1259,7 @@ async function ejecutarPeticionEspeciesAlturaMenor(altura) {
   let especiesFiltradas = await crearListaEspeciesAlturaMenor(altura);
   console.log(especiesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticionEspeciesAlturaMenor, especiesFiltradas.length - 1);
+  crearBotones(ejecutarPeticionEspeciesAlturaMenor, especiesFiltradas.length - 1, altura);
 
   for (especie of especiesFiltradas[pagina - 1]) {
     let especiesCard = crearElementoEspecies(especie);
@@ -1311,7 +1311,7 @@ const crearElementoPlaneta = (dataPlaneta) => {
     <div class="font-bold text-xl mb-2">${dataPlaneta.name}</div>
     <ul class="text-gray-700 text-base">
     <li><b>Rotation Period:</b> ${dataPlaneta.rotation_period}</li>
-    <li><b>Diameter:</b> ${dataPlaneta.diameter} cm</li>
+    <li><b>Diameter:</b> ${dataPlaneta.diameter} km</li>
     <li><b>Climate:</b> ${dataPlaneta.climate}</li>
     <li><b>Gravity:</b> ${dataPlaneta.gravity} </li>
     <li><b>Terrain:</b> ${dataPlaneta.terrain} </li>
@@ -1327,10 +1327,10 @@ const crearElementoEspecies = (dataEspecies) => {
   elementoEspecies.innerHTML = `<div class="px-1 py-4">
     <div class="font-bold text-xl mb-2">${dataEspecies.name}</div>
     <ul class="text-gray-700 text-base">
-    <li><b>Classification Period:</b> ${dataEspecies.classification}</li>
+    <li><b>Classification:</b> ${dataEspecies.classification}</li>
     <li><b>Language:</b> ${dataEspecies.language}</li>
     <li><b>Average Lifespan:</b> ${dataEspecies.average_lifespan}</li>
-    <li><b>Average Height:</b> ${dataEspecies.average_height} </li>
+    <li><b>Average Height:</b> ${dataEspecies.average_height} cm</li>
     </ul>
     </div>`;
   console.log(elementoEspecies);
@@ -1496,3 +1496,79 @@ Max_Cargo_Capacity.addEventListener("input", () => {
 }) */
 
 // Planets
+
+/* const Climate = document.getElementById("Climate")
+const Terrain = document.getElementById("Terrain")
+const Min_Poblacion = document.getElementById("Min_Poblacion")
+const Max_Poblacion = document.getElementById("Max_Poblacion")
+const Min_Diametro = document.getElementById("Min_Diametro")
+const Max_Diametro = document.getElementById("Max_Diametro")
+
+Climate.addEventListener("change", () => {
+  pagina = 1
+  ejecutarPeticionPlanetasClima(Climate.value);
+})
+
+Terrain.addEventListener("change", () => {
+  pagina = 1
+  ejecutarPeticionPlanetasTerreno(Terrain.value);
+})
+
+Min_Poblacion.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticionPlanetasPoblacionMayor(Number(Min_Poblacion.value));
+})
+
+Max_Poblacion.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticionPlanetasPoblacionMenor(Number(Max_Poblacion.value));
+})
+
+Min_Diametro.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticionPlanetasDiametroMayor(Number(Min_Diametro.value));
+})
+
+Max_Diametro.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticionPlanetasDiametroMenor(Number(Max_Diametro.value));
+}) */
+
+// Especies
+
+/* const Classification = document.getElementById("Classification")
+const Language = document.getElementById("Language")
+const Min_Average_Lifespan = document.getElementById("Min_Average_Lifespan")
+const Max_Average_Lifespan = document.getElementById("Max_Average_Lifespan")
+const Min_Height = document.getElementById("Min_Height")
+const Max_Height = document.getElementById("Max_Height")
+
+Classification.addEventListener("change", () => {
+  pagina = 1
+  ejecutarPeticionEspeciesClasificacion(Classification.value);
+})
+
+Language.addEventListener("change", () => {
+  pagina = 1
+  ejecutarPeticionEspeciesLenguaje(Language.value);
+})
+
+Min_Average_Lifespan.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticionEspeciesEdadMayor(Number(Min_Average_Lifespan.value));
+})
+
+Max_Average_Lifespan.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticionEspeciesEdadMenor(Number(Max_Average_Lifespan.value));
+})
+
+Min_Height.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticionEspeciesAlturaMayor(Number(Min_Height.value));
+})
+
+Max_Height.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticionEspeciesAlturaMenor(Number(Max_Height.value));
+}) */
