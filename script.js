@@ -1373,3 +1373,37 @@ window.addEventListener("resize", ()=>{
   menuAside.classList.toggle("-translate-x-80", true)
   }
 })
+
+// Filtros Enlace con Botones
+
+//Characters
+
+const filtroGender = document.getElementById("Gender")
+const filtroOjos = document.getElementById("Ojos")
+const filtroHairColor = document.getElementById("Hair_Color")
+const filtroSkinColor = document.getElementById("Skin_Color")
+
+filtroGender.addEventListener("change", ()=>{ejecutarPeticiónPersonajesGenero(filtroGender.value)})
+filtroGender.addEventListener("change", ()=>{
+  filtroOjos.selectedIndex = 0;
+  filtroHairColor.selectedIndex = 0;
+  filtroSkinColor.selectedIndex = 0;
+})
+filtroOjos.addEventListener("change", ()=>{ejecutarPeticiónPersonajesEyeColor(filtroOjos.value)})
+filtroOjos.addEventListener("change", ()=>{
+  filtroGender.selectedIndex = 0;
+  filtroHairColor.selectedIndex = 0;
+  filtroSkinColor.selectedIndex = 0;
+})
+filtroHairColor.addEventListener("change", ()=>{ejecutarPeticiónPersonajesHairColor(filtroHairColor.value)})
+filtroHairColor.addEventListener("change", ()=>{
+  filtroOjos.selectedIndex = 0;
+  filtroGender.selectedIndex = 0;
+  filtroSkinColor.selectedIndex = 0;
+})
+filtroSkinColor.addEventListener("change", ()=>{ejecutarPeticiónPersonajesSkinColor(filtroSkinColor.value)})
+filtroSkinColor.addEventListener("change", ()=>{
+  filtroOjos.selectedIndex = 0;
+  filtroHairColor.selectedIndex = 0;
+  filtroGender.selectedIndex = 0;
+})
