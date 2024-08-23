@@ -298,3 +298,27 @@ const activarBotónEstilos = (elemento) => {
   elemento.classList =
     "middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize";
 };
+
+//Logica Menu Responsive
+
+const butMenu = document.getElementById("butMenu")
+
+const butMenuCerrar = document.getElementById("butMenuCerrar")
+
+const menuAside = document.getElementById("menuAside")
+
+butMenu.addEventListener("click", ()=>{
+  menuAside.classList.toggle("-translate-x-80")
+})
+
+butMenuCerrar.addEventListener("click", ()=>{
+  menuAside.classList.toggle("-translate-x-80")
+})
+
+window.addEventListener("resize", ()=>{
+  windowWidth = window.innerWidth
+  console.log(windowWidth)
+  if (windowWidth >= 1280){
+  menuAside.classList.toggle("-translate-x-80", true)
+  }
+})
