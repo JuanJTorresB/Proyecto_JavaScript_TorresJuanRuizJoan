@@ -981,7 +981,7 @@ async function ejecutarPeticiónNaves(ignore) {
     opciones
   );
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNaves, 4);
+  crearBotones(ejecutarPeticiónNaves, 4, ignore);
   console.log(resultadoObtenido.results);
   for (let naves of resultadoObtenido.results) {
     let navesCard = crearElementoNave(naves);
@@ -990,11 +990,11 @@ async function ejecutarPeticiónNaves(ignore) {
 }
 
 async function ejecutarPeticiónNavesClase(clase) {
-  activarBotónEstilos(butPersonajes);
+  activarBotónEstilos(butNaves);
   let navesFiltradas = await crearListaNavesClase(clase);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesClase, navesFiltradas.length - 1);
+  crearBotones(ejecutarPeticiónNavesClase, navesFiltradas.length - 1, clase);
 
   for (nave of navesFiltradas[pagina - 1]) {
     let navesCard = crearElementoNave(nave);
@@ -1003,11 +1003,11 @@ async function ejecutarPeticiónNavesClase(clase) {
 }
 
 async function ejecutarPeticiónNavesCostMayor(costo) {
-  activarBotónEstilos(butPersonajes);
+  activarBotónEstilos(butNaves);
   let navesFiltradas = await crearListaNavesCostMayor(costo);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesCostMayor, navesFiltradas.length - 1);
+  crearBotones(ejecutarPeticiónNavesCostMayor, navesFiltradas.length - 1, costo);
 
   for (nave of navesFiltradas[pagina - 1]) {
     let navesCard = crearElementoNave(nave);
@@ -1016,11 +1016,11 @@ async function ejecutarPeticiónNavesCostMayor(costo) {
 }
 
 async function ejecutarPeticiónNavesCostMenor(costo) {
-  activarBotónEstilos(butPersonajes);
+  activarBotónEstilos(butNaves);
   let navesFiltradas = await crearListaNavesCostMenor(costo);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesCostMenor, navesFiltradas.length - 1);
+  crearBotones(ejecutarPeticiónNavesCostMenor, navesFiltradas.length - 1, costo);
 
   for (nave of navesFiltradas[pagina - 1]) {
     let navesCard = crearElementoNave(nave);
@@ -1029,11 +1029,11 @@ async function ejecutarPeticiónNavesCostMenor(costo) {
 }
 
 async function ejecutarPeticiónNavesPasajerosMayor(pasajeros) {
-  activarBotónEstilos(butPersonajes);
+  activarBotónEstilos(butNaves);
   let navesFiltradas = await crearListaNavesPasajerosMayor(pasajeros);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesPasajerosMayor, navesFiltradas.length - 1);
+  crearBotones(ejecutarPeticiónNavesPasajerosMayor, navesFiltradas.length - 1, pasajeros);
 
   for (nave of navesFiltradas[pagina - 1]) {
     let navesCard = crearElementoNave(nave);
@@ -1042,11 +1042,11 @@ async function ejecutarPeticiónNavesPasajerosMayor(pasajeros) {
 }
 
 async function ejecutarPeticiónNavesPasajerosMenor(pasajeros) {
-  activarBotónEstilos(butPersonajes);
+  activarBotónEstilos(butNaves);
   let navesFiltradas = await crearListaNavesPasajerosMenor(pasajeros);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesPasajerosMenor, navesFiltradas.length - 1);
+  crearBotones(ejecutarPeticiónNavesPasajerosMenor, navesFiltradas.length - 1, pasajeros);
 
   for (nave of navesFiltradas[pagina - 1]) {
     let navesCard = crearElementoNave(nave);
@@ -1055,11 +1055,11 @@ async function ejecutarPeticiónNavesPasajerosMenor(pasajeros) {
 }
 
 async function ejecutarPeticiónNavesCapacidadCargaMayor(carga) {
-  activarBotónEstilos(butPersonajes);
+  activarBotónEstilos(butNaves);
   let navesFiltradas = await crearListaNavesCapacidadCargaMayor(carga);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesCapacidadCargaMayor, navesFiltradas.length - 1);
+  crearBotones(ejecutarPeticiónNavesCapacidadCargaMayor, navesFiltradas.length - 1, carga);
 
   for (nave of navesFiltradas[pagina - 1]) {
     let navesCard = crearElementoNave(nave);
@@ -1068,11 +1068,11 @@ async function ejecutarPeticiónNavesCapacidadCargaMayor(carga) {
 }
 
 async function ejecutarPeticiónNavesCapacidadCargaMenor(carga) {
-  activarBotónEstilos(butPersonajes);
+  activarBotónEstilos(butNaves);
   let navesFiltradas = await crearListaNavesCapacidadCargaMenor(carga);
   console.log(navesFiltradas);
   containerPersonajes.innerHTML = null;
-  crearBotones(ejecutarPeticiónNavesCapacidadCargaMenor, navesFiltradas.length - 1);
+  crearBotones(ejecutarPeticiónNavesCapacidadCargaMenor, navesFiltradas.length - 1, carga);
 
   for (nave of navesFiltradas[pagina - 1]) {
     let navesCard = crearElementoNave(nave);
@@ -1294,10 +1294,10 @@ const crearElementoNave = (dataNave) => {
     <div class="font-bold text-xl mb-2">${dataNave.name}</div>
     <ul class="text-gray-700 text-base">
     <li><b>Model:</b> ${dataNave.model}</li>
-    <li><b>Cost in Credits:</b> ${dataNave.cost_in_credits} cm</li>
-    <li><b>Length:</b> ${dataNave.length}</li>
+    <li><b>Cost in Credits:</b> ${dataNave.cost_in_credits}</li>
     <li><b>Passengers:</b> ${dataNave.passengers} </li>
     <li><b>Starship Class:</b> ${dataNave.starship_class} </li>
+    <li><b>Cargo Capacity:</b> ${dataNave.cargo_capacity} </li>
     </ul>
     </div>`;
   console.log(elementoNave);
@@ -1380,7 +1380,7 @@ window.addEventListener("resize", () => {
 
 //Characters
 
-const filtroGender = document.getElementById("Gender")
+/* const filtroGender = document.getElementById("Gender")
 const filtroOjos = document.getElementById("Ojos")
 const filtroHairColor = document.getElementById("Hair_Color")
 const filtroSkinColor = document.getElementById("Skin_Color")
@@ -1412,6 +1412,87 @@ filtroSkinColor.addEventListener("change", () => {
   filtroOjos.selectedIndex = 0;
   filtroHairColor.selectedIndex = 0;
   filtroGender.selectedIndex = 0;
-});
+}); */
 
-  //Starships
+//Starships
+
+/* const Starship_Class = document.getElementById("Starship_Class")
+const Cost_in_Credits = document.getElementById("Cost_in_Credits")
+const Cost_in_Credits_Max = document.getElementById("Cost_in_Credits_Max")
+const Min_Passenger = document.getElementById("Min_Passenger")
+const Max_Passenger = document.getElementById("Max_Passenger")
+const Min_Cargo_Capacity = document.getElementById("Min_Cargo_Capacity")
+const Max_Cargo_Capacity = document.getElementById("Max_Cargo_Capacity")
+
+Starship_Class.addEventListener("change", () => {
+  pagina = 1
+  ejecutarPeticiónNavesClase(Starship_Class.value);
+  Cost_in_Credits.value = 0;
+  Cost_in_Credits_Max.value = 0;
+  Min_Passenger.value = 0;
+  Max_Passenger.value = 0;
+  Min_Cargo_Capacity.value = 0;
+  Max_Cargo_Capacity.value = 0;
+})
+Cost_in_Credits.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticiónNavesCostMayor(Number(Cost_in_Credits.value));
+  Starship_Class.selectedIndex = 0;
+  Cost_in_Credits_Max.value = 0;
+  Min_Passenger.value = 0;
+  Max_Passenger.value = 0;
+  Min_Cargo_Capacity.value = 0;
+  Max_Cargo_Capacity.value = 0;
+})
+Cost_in_Credits_Max.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticiónNavesCostMenor(Number(Cost_in_Credits_Max.value));
+  Starship_Class.selectedIndex = 0;
+  Cost_in_Credits.value = 0;
+  Min_Passenger.value = 0;
+  Max_Passenger.value = 0;
+  Min_Cargo_Capacity.value = 0;
+  Max_Cargo_Capacity.value = 0;
+})
+Min_Passenger.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticiónNavesPasajerosMayor(Number(Min_Passenger.value));
+  Starship_Class.selectedIndex = 0;
+  Cost_in_Credits.value = 0
+  Cost_in_Credits_Max.value = 0
+  Max_Passenger.value = 0
+  Min_Cargo_Capacity.value = 0
+  Max_Cargo_Capacity.value = 0
+})
+Max_Passenger.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticiónNavesPasajerosMenor(Number(Max_Passenger.value));
+  Starship_Class.selectedIndex = 0;
+  Cost_in_Credits.value = 0
+  Cost_in_Credits_Max.value = 0
+  Min_Passenger.value = 0
+  Min_Cargo_Capacity.value = 0
+  Max_Cargo_Capacity.value = 0
+})
+Min_Cargo_Capacity.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticiónNavesCapacidadCargaMayor(Number(Min_Cargo_Capacity.value));
+  Starship_Class.selectedIndex = 0;
+  Cost_in_Credits.value = 0
+  Cost_in_Credits_Max.value = 0
+  Min_Passenger.value = 0
+  Max_Passenger.value = 0
+  Max_Cargo_Capacity.value = 0
+})
+Max_Cargo_Capacity.addEventListener("input", () => {
+  pagina = 1
+  ejecutarPeticiónNavesCapacidadCargaMenor(Number(Max_Cargo_Capacity.value));
+  Starship_Class.selectedIndex = 0;
+  Cost_in_Credits.value = 0
+  Cost_in_Credits_Max.value = 0
+  Min_Passenger.value = 0
+  Max_Passenger.value = 0
+  Min_Cargo_Capacity.value = 0
+}) */
+
+// Planets

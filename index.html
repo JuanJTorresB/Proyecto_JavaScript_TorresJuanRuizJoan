@@ -167,16 +167,19 @@
               <option value="red">Red</option>
             </select></label>
           </section> -->
-          <section>
+          <!-- <section>
             <label
             class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
             disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
             flex items-center gap-4 px-4 capitalize"
-            for="Ojos">Gender: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Gender" name="Gender">
-              <option value="" selected disabled>Select a Gender...</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="hermaphrodite">Hermaphrodite</option>
+            for="Starship_Class">Starship_Class: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Starship_Class" name="Starship_Class">
+              <option value="" selected disabled>Select a Starship Class...</option>
+              <option value="corvette">Corvette</option>
+              <option value="Star Destroyer">Star Destroyer</option>
+              <option value="Light freighter">Light freighter</option>
+              <option value="Medium transport">Medium transport</option>
+              <option value="Star dreadnought">Star dreadnought</option>
+              <option value="Starfighter">Starfighter</option>
             </select></label>
           </section>
           <section>
@@ -184,15 +187,62 @@
             class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
             disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
             flex items-center gap-4 px-4 capitalize"
-            for="Ojos">Eye Color: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Ojos" name="Ojos">
-              <option value="" selected disabled>Select a Eye Color...</option>
-              <option value="blue">Blue</option>
-              <option value="red">Red</option>
-              <option value="green">Green</option>
-              <option value="yellow">Yellow</option>
-              <option value="black">Black</option>
-              <option value="white">White</option>
-              <option value="brown">Brown</option>
+            for="Cost_in_Credits">Min Cost in Credits:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Cost_in_Credits" id="Cost_in_Credits" min="0" max="150000000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Cost_in_Credits_Max">Max Cost in Credits:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Cost_in_Credits_Max" id="Cost_in_Credits_Max" min="35700" max="150000000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Min_Passenger">Min Passengers:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Passenger" id="Min_Passenger" min="0" max="139000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Max_Passenger">Max Passengers:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Passenger" id="Max_Passenger" min="0" max="139000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Min_Cargo_Capacity">Min Cargo Capacity:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Cargo_Capacity" id="Min_Cargo_Capacity" min="100" max="36000000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Max_Cargo_Capacity">Max Cargo Capacity:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Cargo_Capacity" id="Max_Cargo_Capacity" min="100" max="36000000"></label>
+          </section> -->
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Starship_Class">Starship_Class: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Starship_Class" name="Starship_Class">
+              <option value="" selected disabled>Select a Starship Class...</option>
+              <option value="corvette">Corvette</option>
+              <option value="Star Destroyer">Star Destroyer</option>
+              <option value="Light freighter">Light freighter</option>
+              <option value="Medium transport">Medium transport</option>
+              <option value="Star dreadnought">Star dreadnought</option>
+              <option value="Starfighter">Starfighter</option>
             </select></label>
           </section>
           <section>
@@ -200,34 +250,52 @@
             class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
             disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
             flex items-center gap-4 px-4 capitalize"
-            for="Hair_Color">Hair Color: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" id="Hair_Color" name="Hair_Color">
-                <option value="" selected disabled>Select a Hair Color...</option>
-                <option value="blond">Blond</option>
-                <option value="brown">Brown</option>
-                <option value="grey">Grey</option>
-                <option value="black">Black</option>
-                <option value="auburn">Auburn</option>
-                <option value="white">White</option>
-              </select></label>
-            </section>
-            <section>
-              <label
-              class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
-              disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
-              flex items-center gap-4 px-4 capitalize"
-              for="Skin_Color">Skin Color: <select class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-smz" id="Skin_Color" name="Skin_Color">
-                <option value="" selected disabled>Select a Skin Color...</option>
-                <option value="fair">Fair</option>
-                <option value="gold">Gold</option>
-                <option value="white">White</option>
-                <option value="blue">Blue</option>
-                <option value="light">Light</option>
-                <option value="red">Red</option>
-              </select></label>
-            </section>
+            for="Cost_in_Credits">Min Cost in Credits:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Cost_in_Credits" id="Cost_in_Credits" min="0" max="150000000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Cost_in_Credits_Max">Max Cost in Credits:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Cost_in_Credits_Max" id="Cost_in_Credits_Max" min="35700" max="150000000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Min_Passenger">Min Passengers:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Passenger" id="Min_Passenger" min="0" max="139000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Max_Passenger">Max Passengers:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Passenger" id="Max_Passenger" min="0" max="139000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Min_Cargo_Capacity">Min Cargo Capacity:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Min_Cargo_Capacity" id="Min_Cargo_Capacity" min="100" max="36000000"></label>
+          </section>
+          <section>
+            <label
+            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none
+            disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full
+            flex items-center gap-4 px-4 capitalize"
+            for="Max_Cargo_Capacity">Max Cargo Capacity:
+              <input class="bg-gradient-to-tr from-blue-600 to-blue-400 bg-blue-400 text-white rounded-sm" type="range" name="Max_Cargo_Capacity" id="Max_Cargo_Capacity" min="100" max="36000000"></label>
+          </section>
       </form>
       <div id="containerPersonajes"
-        class="container mx-auto mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+        class="container mx-auto mx-auto p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 max-w-full">
         <!-- <div class="bg-white rounded-lg border p-4">
           <div class="px-1 py-4">
             <div class="font-bold text-xl mb-2">Luke Skywalker</div>
