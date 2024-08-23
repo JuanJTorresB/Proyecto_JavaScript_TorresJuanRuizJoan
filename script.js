@@ -700,6 +700,210 @@ async function crearListaPlanetasDiametroMenor(diametro) {
   return listaRetornar;
 }
 
+async function crearListaEspeciesClasificacion(clasificacion) {
+  let especiesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/species/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let especie of resultadoObtenido.results) {
+      if (especie.classification===clasificacion){
+        especiesFiltradas.push(especie);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=especiesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(especiesFiltradas[j]!==undefined){
+        listaAgregar.push(especiesFiltradas[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaEspeciesLenguaje(lenguaje) {
+  let especiesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/species/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let especie of resultadoObtenido.results) {
+      if (especie.language.includes(lenguaje)){
+        especiesFiltradas.push(especie);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=especiesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(especiesFiltradas[j]!==undefined){
+        listaAgregar.push(especiesFiltradas[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaEspeciesEdadMayor(edad) {
+  let especiesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/species/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let especie of resultadoObtenido.results) {
+      if (especie.average_lifespan>=edad &&especie.average_lifespan!=="unknown"){
+        especiesFiltradas.push(especie);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=especiesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(especiesFiltradas[j]!==undefined){
+        listaAgregar.push(especiesFiltradas[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaEspeciesEdadMenor(edad) {
+  let especiesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/species/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let especie of resultadoObtenido.results) {
+      if (especie.average_lifespan<=edad &&especie.average_lifespan!=="unknown"){
+        especiesFiltradas.push(especie);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=especiesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(especiesFiltradas[j]!==undefined){
+        listaAgregar.push(especiesFiltradas[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaEspeciesAlturaMayor(altura) {
+  let especiesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/species/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let especie of resultadoObtenido.results) {
+      if (especie.average_height>=altura &&especie.average_height!=="unknown"){
+        especiesFiltradas.push(especie);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=especiesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(especiesFiltradas[j]!==undefined){
+        listaAgregar.push(especiesFiltradas[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
+async function crearListaEspeciesAlturaMenor(altura) {
+  let especiesFiltradas = [];
+  for (let i=0; i<4; i++){
+    const resultadoObtenido = await petición(
+      `${url}/species/?page=${i+1}`,
+      opciones
+    );
+    
+    for (let especie of resultadoObtenido.results) {
+      if (especie.average_height<=altura &&especie.average_height!=="unknown"){
+        especiesFiltradas.push(especie);
+      }
+    }
+  }
+
+  let listaRetornar = [];
+
+  for (let j=0; j<=especiesFiltradas.length;j++){
+    let listaAgregar = [];
+    for(let i=0;i<=9;i++){
+      if(especiesFiltradas[j]!==undefined){
+        listaAgregar.push(especiesFiltradas[j]);
+      }
+      if(i!==8){
+        j+=1;
+      }
+    }
+
+    listaRetornar.push(listaAgregar);
+
+  }
+  return listaRetornar;
+}
+
 //Peticiones
 async function ejecutarPeticiónPersonajes() {
   activarBotónEstilos(butPersonajes);
@@ -980,6 +1184,84 @@ async function ejecutarPeticiónSpecies() {
   console.log(resultadoObtenido.results);
   for (let especies of resultadoObtenido.results) {
     let especiesCard = crearElementoEspecies(especies);
+    containerPersonajes.appendChild(especiesCard);
+  }
+}
+
+async function ejecutarPeticionEspeciesClasificacion(clasificacion) {
+  activarBotónEstilos(butEspecies);
+  let especiesFiltradas = await crearListaEspeciesClasificacion(clasificacion);
+  console.log(especiesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionEspeciesClasificacion, especiesFiltradas.length-1);
+
+  for(especie of especiesFiltradas[pagina-1]){
+    let especiesCard = crearElementoEspecies(especie);
+    containerPersonajes.appendChild(especiesCard);
+  }
+}
+
+async function ejecutarPeticionEspeciesLenguaje(lenguaje) {
+  activarBotónEstilos(butEspecies);
+  let especiesFiltradas = await crearListaEspeciesLenguaje(lenguaje);
+  console.log(especiesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionEspeciesLenguaje, especiesFiltradas.length-1);
+
+  for(especie of especiesFiltradas[pagina-1]){
+    let especiesCard = crearElementoEspecies(especie);
+    containerPersonajes.appendChild(especiesCard);
+  }
+}
+
+async function ejecutarPeticionEspeciesEdadMayor(edad) {
+  activarBotónEstilos(butEspecies);
+  let especiesFiltradas = await crearListaEspeciesEdadMayor(edad);
+  console.log(especiesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionEspeciesEdadMayor, especiesFiltradas.length-1);
+
+  for(especie of especiesFiltradas[pagina-1]){
+    let especiesCard = crearElementoEspecies(especie);
+    containerPersonajes.appendChild(especiesCard);
+  }
+}
+
+async function ejecutarPeticionEspeciesEdadMenor(edad) {
+  activarBotónEstilos(butEspecies);
+  let especiesFiltradas = await crearListaEspeciesEdadMenor(edad);
+  console.log(especiesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionEspeciesEdadMenor, especiesFiltradas.length-1);
+
+  for(especie of especiesFiltradas[pagina-1]){
+    let especiesCard = crearElementoEspecies(especie);
+    containerPersonajes.appendChild(especiesCard);
+  }
+}
+
+async function ejecutarPeticionEspeciesAlturaMayor(altura) {
+  activarBotónEstilos(butEspecies);
+  let especiesFiltradas = await crearListaEspeciesAlturaMayor(altura);
+  console.log(especiesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionEspeciesAlturaMayor, especiesFiltradas.length-1);
+
+  for(especie of especiesFiltradas[pagina-1]){
+    let especiesCard = crearElementoEspecies(especie);
+    containerPersonajes.appendChild(especiesCard);
+  }
+}
+
+async function ejecutarPeticionEspeciesAlturaMenor(altura) {
+  activarBotónEstilos(butEspecies);
+  let especiesFiltradas = await crearListaEspeciesAlturaMenor(altura);
+  console.log(especiesFiltradas);
+  containerPersonajes.innerHTML = null;
+  crearBotones(ejecutarPeticionEspeciesAlturaMenor, especiesFiltradas.length-1);
+
+  for(especie of especiesFiltradas[pagina-1]){
+    let especiesCard = crearElementoEspecies(especie);
     containerPersonajes.appendChild(especiesCard);
   }
 }
